@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="update-company-table" author="nhphuc">
+        <modifyDataType tableName="COMPANY" columnName="IS_DELETED" newDataType="NUMBER(1,0)"/>
+        <modifyDataType tableName="COMPANY" columnName="STATUS" newDataType="NUMBER(3,0)"/>
+        <dropColumn tableName="COMPANY" columnName="SHORT_DESCRIPTION"/>
+        <renameColumn tableName="COMPANY" oldColumnName="FULL_DESCRIPTION" newColumnName="DESCRIPTION"
+                      columnDataType="NVARCHAR2(700)"/>
+        <modifyDataType tableName="COMPANY" columnName="COMPANY_NAME" newDataType="NVARCHAR2(50)"/>
+        <modifyDataType tableName="COMPANY" columnName="LOGO" newDataType="VARCHAR(2000)"/>
+        <modifyDataType tableName="COMPANY" columnName="ADDRESS" newDataType="NVARCHAR2(50)"/>
+        <modifyDataType tableName="COMPANY" columnName="PHONE" newDataType="VARCHAR(15)"/>
+        <modifyDataType tableName="COMPANY" columnName="AMADEUS" newDataType="VARCHAR(10)"/>
+        <modifyDataType tableName="COMPANY" columnName="GALILEO" newDataType="VARCHAR(10)"/>
+        <modifyDataType tableName="COMPANY" columnName="WORLDSPAN" newDataType="VARCHAR(10)"/>
+        <modifyDataType tableName="COMPANY" columnName="SABRE" newDataType="VARCHAR(10)"/>
+        <modifyDataType tableName="COMPANY" columnName="WEB" newDataType="VARCHAR(100)"/>
+    </changeSet>
+</databaseChangeLog>

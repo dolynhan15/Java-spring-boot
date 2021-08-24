@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="working_hour_table_insert_data" author="trung.mai" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/working-hour.csv"
+                        separator=","
+                        tableName="WORKING_HOUR" primaryKey="WORKING_HOUR_ID">
+            <column name="WORKING_HOUR_ID" type="NUMERIC" />
+            <column name="WORKING_HOUR_DESCRIPTION" type="STRING" />
+            <column name="START_TIME" type="STRING" />
+            <column name="END_TIME" type="STRING" />
+            <column name="WORKING_TYPE" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

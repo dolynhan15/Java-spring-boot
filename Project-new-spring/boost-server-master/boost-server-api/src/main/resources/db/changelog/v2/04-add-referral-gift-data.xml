@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-referral-gift-table" author="dlly">
+        <createTable tableName="REFERRAL_GIFT">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ASSESSMENT_ID" type="NUMERIC"/>
+            <column name="NAME_EN_US" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="NAME_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="NAME_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="NAME_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="NAME_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="NAME_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="NAME_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="NAME_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_EN_US" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_ZH_CN" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_ZH_TW" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_ID_ID" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_JA_JP" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_MS_MY" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_TH_TH" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_VI_VN" type="NVARCHAR2(1000)"/>
+            <column name="DESCRIPTION_KO_KR" type="NVARCHAR2(1000)"/>
+            <column name="IMAGE" type="NVARCHAR2(1000)"/>
+            <column name="COIN" type="NUMERIC"/>
+            <column name="TOTAL" type="NUMERIC"/>
+            <column name="REMAIN" type="NUMERIC"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC" defaultValue="0"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="REFERRAL_GIFT"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-sequence-for-referral-gift-table" author="dlly">
+        <sqlFile path="/db/sql/sequence/create-referral-gift-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="drop-not-null-for-name-en-us-in-referral-gift-table" author="dlly">
+        <dropNotNullConstraint tableName="REFERRAL_GIFT" columnName="NAME_EN_US"/>
+        <rollback>
+            <dropColumn tableName="REFERRAL_GIFT" columnName="NAME_EN_US"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="load-referral-gift-data" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/referral-gift.csv"
+                        separator=","
+                        tableName="REFERRAL_GIFT" primaryKey="ID">
+            <column name="ID" type="NUMERIC" />
+            <column name="ASSESSMENT_ID" type="NUMERIC" />
+            <column name="NAME_EN_US" type="STRING"/>
+            <column name="NAME_ZH_CN" type="STRING"/>
+            <column name="NAME_ZH_TW" type="STRING"/>
+            <column name="NAME_ID_ID" type="STRING"/>
+            <column name="NAME_JA_JP" type="STRING"/>
+            <column name="NAME_MS_MY" type="STRING"/>
+            <column name="NAME_TH_TH" type="STRING"/>
+            <column name="NAME_VI_VN" type="STRING"/>
+            <column name="NAME_KO_KR" type="STRING"/>
+            <column name="DESCRIPTION_EN_US" type="STRING"/>
+            <column name="DESCRIPTION_ZH_CN" type="STRING"/>
+            <column name="DESCRIPTION_ZH_TW" type="STRING"/>
+            <column name="DESCRIPTION_ID_ID" type="STRING"/>
+            <column name="DESCRIPTION_JA_JP" type="STRING"/>
+            <column name="DESCRIPTION_MS_MY" type="STRING"/>
+            <column name="DESCRIPTION_TH_TH" type="STRING"/>
+            <column name="DESCRIPTION_VI_VN" type="STRING"/>
+            <column name="DESCRIPTION_KO_KR" type="STRING"/>
+            <column name="IMAGE" type="STRING"/>
+            <column name="COIN" type="NUMERIC"/>
+            <column name="TOTAL" type="NUMERIC"/>
+            <column name="REMAIN" type="NUMERIC"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="STRING"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

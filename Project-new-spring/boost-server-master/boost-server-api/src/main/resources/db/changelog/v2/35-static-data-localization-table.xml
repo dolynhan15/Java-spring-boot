@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-country-localization-table" author="nhphuc">
+        <createTable tableName="COUNTRY_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="COUNTRY_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-province-localization-table" author="nhphuc">
+        <createTable tableName="PROVINCE_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PROVINCE_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-hotel-type-localization-table" author="nhphuc">
+        <createTable tableName="HOTEL_TYPE_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="HOTEL_TYPE_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-company-role-localization-table" author="nhphuc">
+        <createTable tableName="COMPANY_ROLE_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="COMPANY_ROLE_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-job-localization-table" author="nhphuc">
+        <createTable tableName="JOB_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="JOB_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-benefit-localization-table" author="nhphuc">
+        <createTable tableName="BENEFIT_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="BENEFIT_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet id="create-soft-skill-localization-table" author="nhphuc">
+        <createTable tableName="SOFT_SKILL_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="SOFT_SKILL_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-language-localization-table" author="nhphuc">
+        <createTable tableName="LANGUAGE_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="LANGUAGE_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-currency-localization-table" author="nhphuc">
+        <createTable tableName="CURRENCY_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="CURRENCY_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-education-localization-table" author="nhphuc">
+        <createTable tableName="EDUCATION_LOCALIZATION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="EDUCATION_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-personal-assessment-localization-table" author="nhphuc">
+        <createTable tableName="PA_LOCALIZATION" remarks="Personal_Assessment table">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PA_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-personal-assessment-question-localization-table" author="nhphuc">
+        <createTable tableName="PAQ_LOCALIZATION" remarks="Personal Asessment Question table">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PAQ_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-personal-assessment-question-type-localization-table" author="nhphuc">
+        <createTable tableName="PAQT_LOCALIZATION" remarks="Personal Asessment Question Type table">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="LOCALE" type="VARCHAR(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="CONTENT" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PAQT_LOCALIZATION"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

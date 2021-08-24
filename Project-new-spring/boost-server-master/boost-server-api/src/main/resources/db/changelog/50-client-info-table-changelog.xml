@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="client-info-table-create-new-one" author="dlly">
+        <createTable tableName="CLIENT_INFO">
+            <column name="TOKEN" type="NVARCHAR2(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="APP_ID" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APP_VERSION" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEVICE_MODEL" type="NVARCHAR2(255)"/>
+            <column name="PLATFORM" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OS_VERSION" type="NVARCHAR2(255)"/>
+            <column name="DEVICE_TOKEN" type="NVARCHAR2(255)"/>
+            <column name="USER_PROFILE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGIN_TIME" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LOGOUT_TIME" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add_channel_id_into_client_info_table" author="dlly">
+        <addColumn tableName="CLIENT_INFO">
+            <column name="CHANNEL_ID" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

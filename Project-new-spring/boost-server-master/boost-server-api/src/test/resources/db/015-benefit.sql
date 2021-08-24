@@ -1,0 +1,15 @@
+Insert into BENEFIT (BENEFIT_ID,DESCRIPTION,NAME,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE,IS_DELETED) values
+(1,'Child and Elder care benefits','Child and Elder care benefits',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(2,'Compensation time','Compensation time',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(3,'Family-friendly benefits','Family-friendly benefits',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(4,'Flex time','Flex time',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(5,'Health insurance','Health insurance',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(6,'Job resources','Job resources',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(7,'Life and disability insurance','Life and disability insurance',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(8,'Phased retirement','Phased retirement',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(9,'Professional development','Professional development',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(10,'Relocation','Relocation',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(11,'Retirement investment plans','Retirement investment plans',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(12,'Sick, personal, and parental leave','Sick personal and parental leave',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(13,'Tuition reimbursement','Tuition reimbursement',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0),
+(14,'Vacation time','Vacation time',null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),null,to_timestamp('13-JUL-18 05.45.08.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),0);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-is-admin-column-in-user-profile-table" author="dlly">
+        <addColumn tableName="USER_PROFILE">
+            <column name="IS_ADMIN" type="NUMERIC(1)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-not-null-default-value-for-user-profile-table" author="nhphuc">
+        <addNotNullConstraint tableName="USER_PROFILE" columnName="IS_ADMIN" columnDataType="NUMERIC(1)" defaultNullValue="0"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="drop-app-version-column-table" author="dlly">
+        <dropColumn tableName="APP_VERSION" columnName="APP_VERSION"/>
+    </changeSet>
+
+    <changeSet id="add-new-app-version-column-in-app-version-table" author="dlly">
+        <addColumn tableName="APP_VERSION">
+            <column name="APP_VERSION" defaultValue="1" type="INTEGER(10)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-new-app-version-column-in-app-version-name-table" author="trung.mai">
+        <addColumn tableName="APP_VERSION">
+            <column name="APP_VERSION_NAME" defaultValue="1.0.0" type="VARCHAR2(100)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add_app_version" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/app-version.csv"
+                        separator=","
+                        tableName="APP_VERSION" primaryKey="APP_VERSION_ID">
+            <column name="APP_VERSION_ID" type="NUMERIC" />
+            <column name="APP_ID" type="STRING" />
+            <column name="APP_VERSION" type="NUMERIC" />
+            <column name="APP_VERSION_NAME" type="STRING" />
+            <column name="OS" type="STRING" />
+            <column name="IS_FORCE_UPDATE" type="NUMERIC" />
+            <column name="CREATED_DATE" type="STRING" />
+            <column name="UPDATED_DATE" type="STRING" />
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

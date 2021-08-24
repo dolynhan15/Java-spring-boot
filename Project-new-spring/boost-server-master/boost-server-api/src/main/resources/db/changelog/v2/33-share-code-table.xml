@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="share-code-create-table" author="dlly">
+        <createTable tableName="SHARE_CODE">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="REFERRAL_CODE_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-share-code-referral-code-id" referencedTableName="REFERRAL_CODE" referencedColumnNames="REFERRAL_CODE_ID" nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="SHARE_CODE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="share-code-create-sequence" author="dlly">
+        <sqlFile path="/db/sql/sequence/create-share-code-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+</databaseChangeLog>

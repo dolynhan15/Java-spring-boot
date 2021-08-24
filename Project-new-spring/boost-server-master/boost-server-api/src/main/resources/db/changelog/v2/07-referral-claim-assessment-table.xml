@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-gift-id-into-referral-claim-assessment-table" author="dlly">
+        <addColumn tableName="REFERRAL_CLAIM_ASSESSMENT">
+            <column name="REFERRAL_GIFT_ID" type="NUMERIC"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="REFERRAL_CLAIM_ASSESSMENT" columnName="REFERRAL_GIFT_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="drop-not-null-for-assessment-id-in-referral-claim-assessment" author="dlly">
+        <dropNotNullConstraint tableName="REFERRAL_CLAIM_ASSESSMENT" columnName="ASSESSMENT_ID"/>
+        <rollback>
+            <dropColumn tableName="REFERRAL_CLAIM_ASSESSMENT" columnName="ASSESSMENT_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="rename-referral-assessment-column-into-id-column" id="renameColumn-example">
+        <renameColumn tableName="REFERRAL_CLAIM_ASSESSMENT" oldColumnName="REFERRAL_ASSESSMENT_ID" newColumnName="ID" />
+        <rollback>
+            <dropColumn tableName="REFERRAL_CLAIM_ASSESSMENT" columnName="REFERRAL_ASSESSMENT_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="drop-sequence-for-referral-claim-assessment-table" author="dlly">
+        <dropSequence sequenceName="REFERRAL_ASSESSMENT_SEQ"/>
+    </changeSet>
+
+</databaseChangeLog>

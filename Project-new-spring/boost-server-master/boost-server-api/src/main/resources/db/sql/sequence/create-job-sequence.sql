@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(JOB_ID),0)  + 1
+    INTO seqval
+    FROM JOB;
+   
+  
+    execute immediate('CREATE SEQUENCE JOB_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

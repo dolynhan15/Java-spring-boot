@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-assessment-qualification-table-changelog" author="dlly">
+        <createTable tableName="ASSESSMENT_QUALIFICATION">
+            <column name="QUALIFICATION_ID" type="NUMERIC">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="NAME" type="NVARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LEVEL_NAME" type="NVARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPIRED_TIME" type="TIMESTAMP(6)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-user-profile-id-column-assessment-qualification-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_QUALIFICATION">
+            <column name="USER_PROFILE_ID" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-scale-id-column-assessment-qualification-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_QUALIFICATION">
+            <column name="SCALE_ID" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-assessment-id-column-assessment-qualification-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_QUALIFICATION">
+            <column name="ASSESSMENT_ID" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="change-data-type-for-name-column-assessment-qualification-table" author="dlly">
+        <modifyDataType
+                columnName="NAME"
+                newDataType="nvarchar2(128)"
+                tableName="ASSESSMENT_QUALIFICATION" />
+    </changeSet>
+
+    <changeSet id="assessment-qualification-table-add-level" author="trung.mai">
+        <addColumn tableName="ASSESSMENT_QUALIFICATION">
+            <column name="LEVEL_VALUE" type="NUMERIC"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="assessment-qualification-table-add-submission-time" author="trung.mai">
+        <addColumn tableName="ASSESSMENT_QUALIFICATION">
+            <column name="SUBMISSION_TIME" type="TIMESTAMP(6)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="assessment-qualification-table-drop-user-qualification" author="trung.mai">
+        <dropTable tableName="USER_QUALIFICATION"/>
+    </changeSet>
+    
+    <changeSet id="assessment-qualification-table-remane-to-user-qualification" author="trung.mai">
+        <renameTable oldTableName="ASSESSMENT_QUALIFICATION" newTableName="USER_QUALIFICATION"/>
+    </changeSet>
+
+</databaseChangeLog>

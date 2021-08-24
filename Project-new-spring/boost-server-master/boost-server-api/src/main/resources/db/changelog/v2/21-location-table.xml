@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-is-deletable-is-editable-to-location" author="nhphuc">
+        <addColumn tableName="LOCATION">
+            <column name="IS_USED" type="NUMBER(1,0)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_PRIMARY" type="NUMBER(1,0)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <sql>UPDATE LOCATION l SET l.IS_PRIMARY = (SELECT
+            CASE WHEN COUNT(*) > 0 THEN 1 ELSE 0 END
+            FROM COMPANY c
+            WHERE c.CITY_ID = l.CITY_ID AND c.ADDRESS = l.ADDRESS )</sql>
+        <sql>UPDATE LOCATION l SET l.IS_USED = (SELECT CASE WHEN count(v.VACANCY_ID) + count(a.APPOINTMENT_ID) > 0 THEN 1 ELSE 0 END FROM LOCATION lo
+            LEFT JOIN VACANCY v ON v.JOB_LOCATION_ID = lo.LOCATION_ID OR  v.SEARCH_LOCATION_ID = lo.LOCATION_ID
+            LEFT JOIN APPOINTMENT a ON a.LOCATION_ID = lo.LOCATION_ID
+            WHERE l.LOCATION_ID = lo.LOCATION_ID
+            GROUP BY lo.LOCATION_ID)</sql>
+
+        <rollback>
+            <dropColumn tableName="LOCATION" columnName="IS_USED"/>
+            <dropColumn tableName="LOCATION" columnName="IS_PRIMARY"/>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>

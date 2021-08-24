@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="update-structure-currency-table" author="tnlong">
+        <dropColumn columnName="MIN_SALARY_MONTHLY"
+                    tableName="currency"/>
+        <dropColumn columnName="MAX_SALARY_MONTHLY"
+                    tableName="currency"/>
+        <renameColumn tableName="currency" oldColumnName="MIN_SALARY_HOURLY" newColumnName="MIN_SALARY" />
+        <renameColumn tableName="currency" oldColumnName="MAX_SALARY_HOURLY" newColumnName="MAX_SALARY" />
+        <addColumn tableName="currency">
+            <column name="symbol" type="varchar(20)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

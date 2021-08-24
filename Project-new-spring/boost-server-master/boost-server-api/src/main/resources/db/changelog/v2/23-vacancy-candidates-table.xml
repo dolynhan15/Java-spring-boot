@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="vacancy-candidate-table-rename-vacancy-candidate-id-to-id" author="dlly">
+        <renameTable newTableName="VACANCY_CANDIDATE" oldTableName="VACANCY_CANDIDATES"/>
+        <renameColumn tableName="VACANCY_CANDIDATE" oldColumnName="VACANCY_CANDIDATE_ID" newColumnName="ID"/>
+    </changeSet>
+
+    <changeSet id="correct-columns-in-vacancy-candidate-table" author="dlly">
+        <addColumn tableName="VACANCY_CANDIDATE">
+            <column name="CANDIDATE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ARCHIVIST_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="VACANCY_CANDIDATE" columnName="CANDIDATE_ID"/>
+            <dropColumn tableName="VACANCY_CANDIDATE" columnName="ARCHIVIST_ID"/>
+        </rollback>
+
+        <addForeignKeyConstraint constraintName="VACANCY_CANDIDATE_TO_USER_CV"
+                                 baseTableName="VACANCY_CANDIDATE" baseColumnNames="CANDIDATE_ID"
+                                 referencedTableName="USER_CURRICULUM_VITAE" referencedColumnNames="CURRICULUM_VITAE_ID"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="VACANCY_CANDIDATE" constraintName="VACANCY_CANDIDATE_TO_USER_CV"/>
+        </rollback>
+
+        <addForeignKeyConstraint constraintName="VACANCY_CANDIDATE_TO_STAFF"
+                                 baseTableName="VACANCY_CANDIDATE" baseColumnNames="ARCHIVIST_ID"
+                                 referencedTableName="STAFF" referencedColumnNames="STAFF_ID"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="VACANCY_CANDIDATE" constraintName="VACANCY_CANDIDATE_TO_STAFF"/>
+        </rollback>
+
+    </changeSet>
+
+    <changeSet id="drop-user-profile-id-column-in-vacancy-candidate-table" author="dlly">
+        <dropColumn tableName="VACANCY_CANDIDATE" columnName="USER_PROFILE_ID"/>
+    </changeSet>
+
+    <changeSet id="edit-comment-in-candidate-status-column-in-vacancy-candidate-table" author="dlly">
+        <!-- This command is only used in Oracle -->
+        <sql>COMMENT ON COLUMN VACANCY_CANDIDATE.CANDIDATE_STATUS IS '1: Recruited' </sql>
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-candidate-table" author="dlly">
+        <sqlFile path="/db/sql/sequence/create-vacancy-candidate-sequence.sql" splitStatements="true"
+                 stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+    <changeSet id="create-is-suspend-range-function" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/function/create-is-suspend-range-function.sql" splitStatements="true"
+                 stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+</databaseChangeLog>

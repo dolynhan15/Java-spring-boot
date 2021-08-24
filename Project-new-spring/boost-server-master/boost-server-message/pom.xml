@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>boost-server-message</artifactId>
+    <version>1.0.0</version>
+    <packaging>war</packaging>
+    <parent>
+        <groupId>com.qooco</groupId>
+        <artifactId>boost-server</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qooco</groupId>
+            <artifactId>boost-server-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- this will get rid of version info from war file name -->
+                    <finalName>${rp.build.warname}</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

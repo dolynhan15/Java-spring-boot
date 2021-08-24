@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-signId-to-access-token-table" author="nhphuc">
+        <addColumn tableName="USER_ACCESS_TOKEN">
+            <column name="SIGN_IN_ID" type="VARCHAR(200)"/>
+            <column name="SESSION_ID" type="VARCHAR(200)"/>
+            <column name="DEVICE_TYPE" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <renameColumn tableName="USER_ACCESS_TOKEN" oldColumnName="FCM_TOKEN" newColumnName="CHANNEL_ID" columnDataType="VARCHAR(200)"/>
+    </changeSet>
+    <changeSet id="create_user_access_token_view" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/create-user-access-token.sql" splitStatements="true" stripComments="true"/>
+    </changeSet>
+</databaseChangeLog>

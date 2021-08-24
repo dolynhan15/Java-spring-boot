@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="pata-file-table-add-thumbnail-column" author="trung.mai">
+        <addColumn tableName="PATA_FILE">
+            <column name="THUMBNAIL_URL" type="CLOB"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="PATA_FILE" columnName="THUMBNAIL_URL"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="pata-file-table-add-duration-column" author="trung.mai">
+        <addColumn tableName="PATA_FILE">
+            <column name="DURATION" type="NUMBER(10)"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="PATA_FILE" columnName="DURATION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="pata-file-table-add-purpose-column" author="trung.mai">
+        <addColumn tableName="PATA_FILE">
+            <column name="PURPOSE" type="NUMBER(2)" remarks="1: file in message chat; null: avatar, company logo, vacancy logo, previous position, nation photo"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="PATA_FILE" columnName="PURPOSE"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

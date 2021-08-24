@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--Change set version 2-->
+    <include file="changelog/v2/01-add-personal-assessment-data.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/02-create-sequence-for-tables.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/03-location-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/05-appointment-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/06-appointment-detail-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/07-referral-claim-assessment-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/08-user-wallet-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/08-user-wallet-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/09-referral-claim-gift-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/10-vacancy-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/10-inventory-for-referral-gift.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/11-user-profile-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/13-appointment-date-range-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/14-appointment-time-range-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/15-appointment-table-v2.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/16-app-version-table-v2.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/17-user-profile-table-v2.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/18-create-view-appointment-statistics.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/18-update-min-max-currency-value.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/19-user-access-token.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/20-company-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/21-location-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/22-create-function-get-display-name.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/23-vacancy-candidates-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/24-user-access-token-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/23-create-singapore-administrative-devision.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/33-job-table-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/07-insert-symbol-currency-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/25-pata-file-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/26-message-template-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/27-profile-attribute-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/28-user-attribute-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/29-attribute-event-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/30-user-attribute-event.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/31-statistic-dashboard.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/32-create-view-statistic-vacancy-seat.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/33-share-code-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/34-user-preferred-hotel-table.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v2/35-static-data-localization-table.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="city_table_insert_thailan_city_data" author="trung.mai" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/thailan-city.csv"
+                        separator=","
+                        tableName="CITY" primaryKey="CITY_ID">
+            <column name="CITY_ID" type="NUMERIC" />
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="CITY_NAME" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="city_table_insert_indonesia_city_data" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/city-indonesia.csv"
+                        separator=","
+                        tableName="CITY" primaryKey="CITY_ID">
+            <column name="CITY_ID" type="NUMERIC" />
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="CITY_NAME" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="city_table_insert_vietnam_city_data" author="tnlong" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/city-vietnam.csv"
+                        separator=","
+                        tableName="CITY" primaryKey="CITY_ID">
+            <column name="CITY_ID" type="NUMERIC" />
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="CITY_NAME" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

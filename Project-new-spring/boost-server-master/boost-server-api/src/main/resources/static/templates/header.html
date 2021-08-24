@@ -1,0 +1,23 @@
+<div th:fragment="header(displayName, job, phone, email)">
+    <div class="header-container">
+        <img class="select-logo" th:src="@{|${baseUrl}/images/select-logo.png|}" alt="logo"/>
+
+        <div class="header-basic-info">
+            <span class="user-name" th:text="${displayName}"></span>
+            <p class="vacancy-job" th:text="${job}">AAA</p>
+        </div>
+        <div class="header-contact">
+            <div class="header-contact-user-phone" th:unless="${#strings.isEmpty(phone)}">
+                <img class="header-contact-ic" th:src="@{|${baseUrl}/images/phone.png|}">
+                <span class="header-contact-text" th:text="${phone}"></span>
+            </div>
+            <div class="header-contact-user-email" th:unless="${#strings.isEmpty(email)}">
+                <img class="header-contact-ic" th:src="@{|${baseUrl}/images/email.png|}">
+                <span class="header-contact-text" th:text="${email}"></span>
+            </div>
+        </div>
+        <div class="page-count">
+            <p id="pagenumber"></p>
+        </div>
+    </div>
+</div>

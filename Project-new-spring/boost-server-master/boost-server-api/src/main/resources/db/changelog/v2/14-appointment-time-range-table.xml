@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="appointment-time-range-table-create-table" author="dlly">
+        <createTable tableName="APPOINTMENT_TIME_RANGE">
+            <column name="ID" type="NUMBER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_TIME" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMBER"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMBER"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMBER" defaultValue="0"/>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="APTM_TIME_RANGE_TO_APPOINTMENT"
+                                 baseTableName="APPOINTMENT_TIME_RANGE" baseColumnNames="APPOINTMENT_ID"
+                                 referencedTableName="APPOINTMENT" referencedColumnNames="APPOINTMENT_ID"/>
+
+        <rollback>
+            <dropTable tableName="APPOINTMENT_TIME_RANGE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="appointment-time-range-table-add-sequence" author="dlly">
+        <sqlFile path="/db/sql/sequence/create-appointment-time-range-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+</databaseChangeLog>

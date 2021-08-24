@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(PROVINCE_ID),0)  + 1
+    INTO seqval
+    FROM PROVINCE;
+   
+  
+    execute immediate('CREATE SEQUENCE PROVINCE_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

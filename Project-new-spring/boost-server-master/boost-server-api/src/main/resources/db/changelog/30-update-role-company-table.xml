@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-display-name-column-in-role-company-table" author="dlly">
+        <addColumn tableName="ROLE_COMPANY">
+            <column name="DISPLAY_NAME" type="NVARCHAR2(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="insert-data-in-role-company-table" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/role-company.csv"
+                        separator=","
+                        tableName="ROLE_COMPANY" primaryKey="ROLE_ID">
+            <column name="ROLE_ID" type="NUMERIC"/>
+            <column name="NAME" type="STRING"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+            <column name="DISPLAY_NAME" type="STRING"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="add-not-null-constraint-for-display-name-column-in-role-company-table" author="dlly">
+        <addNotNullConstraint tableName="ROLE_COMPANY" columnName="DISPLAY_NAME"/>
+    </changeSet>
+</databaseChangeLog>

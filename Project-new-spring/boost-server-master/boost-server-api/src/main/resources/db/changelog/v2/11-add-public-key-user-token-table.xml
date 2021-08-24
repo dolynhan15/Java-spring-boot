@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="add-public-key-in-user-access-token-table" id="nhphuc">
+        <addColumn tableName="USER_ACCESS_TOKEN">
+            <column name="PUBLIC_KEY" type="VARCHAR(4000)"></column>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="USER_ACCESS_TOKEN" columnName="PUBLIC_KEY"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-fit-user-language" author="nhphuc" runOnChange="true">
+        <sql> <![CDATA[
+        CREATE OR REPLACE VIEW APPOINTMENT_NOW_STATISTICS
+        AS SELECT
+            a.APPOINTMENT_ID,
+            a.LOCATION_ID,
+            a.STAFF_ID,
+            a.VACANCY_ID,
+            a.TYPE,
+            a.APPOINTMENT_DATE,
+            a.FROM_DATE,
+            MIN(CASE WHEN ad.STATUS IN (1) AND ad.IS_DELETED = 0 THEN ad.APPOINTMENT_TIME END) AS NEXT_PENDING_APPOINTMENT,
+            MIN(CASE WHEN ad.STATUS IN (12, 2) AND ad.IS_DELETED = 0 THEN ad.APPOINTMENT_TIME END) AS NEXT_ACCEPTED_APPOINTMENT,
+            MAX(CASE WHEN ad.STATUS IN (1) AND ad.IS_DELETED = 0 AND ad.APPOINTMENT_TIME < SYS_EXTRACT_UTC(SYSTIMESTAMP) THEN ad.APPOINTMENT_TIME END) AS LAST_ACCEPTED_APPOINTMENT,
+            COUNT(ad.APPOINTMENT_DETAIL_ID) AS COUNT_TOTAL,
+            COUNT(CASE WHEN ad.STATUS IN (12, 2) AND ad.IS_DELETED = 0 THEN 1 END) AS ACCEPTED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (12, 2) AND ad.IS_DELETED = 0 AND ad.APPOINTMENT_TIME >= SYS_EXTRACT_UTC(SYSTIMESTAMP) THEN 1 END) AS NEXT_ACCEPTED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (1) AND ad.IS_DELETED = 0 AND ad.APPOINTMENT_TIME >= SYS_EXTRACT_UTC(SYSTIMESTAMP) THEN 1 END) AS NEXT_PENDING_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (14, 124) AND ad.IS_DELETED = 0 THEN 1 END) AS CANCELLED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (15, 125) AND ad.IS_DELETED = 0 THEN 1 END) AS CHANGED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (14, 124, 15, 125) AND ad.IS_DELETED = 0 THEN 1 END) AS CANCELLED_CHANGED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS IN (13, 3) AND ad.IS_DELETED = 0 THEN 1 END) AS DECLINED_EVENTS,
+            COUNT(CASE WHEN ad.STATUS = 1 AND ad.IS_DELETED = 0 THEN 1 END) AS PENDING_EVENTS
+            FROM APPOINTMENT a
+            JOIN APPOINTMENT_DETAIL ad
+            ON a.APPOINTMENT_ID = ad.APPOINTMENT_ID
+            WHERE ad.APPOINTMENT_TIME >= SYS_EXTRACT_UTC(SYSTIMESTAMP) AND ad.IS_DELETED = 0 AND a.IS_DELETED = 0
+            GROUP BY a.APPOINTMENT_ID, a.LOCATION_ID, a.STAFF_ID,a.VACANCY_ID, a.TYPE, a.APPOINTMENT_DATE, a.FROM_DATE
+            ORDER BY NEXT_ACCEPTED_APPOINTMENT ASC, LAST_ACCEPTED_APPOINTMENT DESC;
+    ]]></sql>
+    </changeSet>
+
+
+
+</databaseChangeLog>

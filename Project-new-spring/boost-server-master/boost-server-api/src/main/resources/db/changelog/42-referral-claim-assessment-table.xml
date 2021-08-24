@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-referral-claim-assessment-table" author="tnlong">
+        <createTable tableName="referral_claim_assessment">
+            <column name="referral_assessment_id" type="NUMERIC" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_profile_id" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assessment_id" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+            <column name="spent_point" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_used" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP(6)"/>
+            <column name="updated_date" type="TIMESTAMP(6)"/>
+            <column name="created_by" type="NUMERIC"/>
+            <column name="updated_by" type="NUMERIC"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

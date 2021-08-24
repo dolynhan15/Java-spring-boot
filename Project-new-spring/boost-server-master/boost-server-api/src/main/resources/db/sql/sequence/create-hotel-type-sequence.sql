@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(HOTEL_TYPE_ID),0)  + 1
+    INTO seqval
+    FROM HOTEL_TYPE;
+   
+  
+    execute immediate('CREATE SEQUENCE HOTEL_TYPE_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

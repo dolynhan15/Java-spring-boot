@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="remove_foreign_key_created_by_in_vacancy_table" author="trung.mai">
+        <dropForeignKeyConstraint baseTableName="vacancy" constraintName="vacancy_to_staff"/>
+    </changeSet>
+
+    <changeSet id="vacancy_table_remove_vacancy_created_by_user" author="trung.mai">
+        <dropForeignKeyConstraint baseTableName="vacancy" constraintName="vacancy_created_by_user"/>    </changeSet>
+
+    <changeSet id="vacancy_table_add_foreign_vacancy_to_staff" author="trung.mai">
+        <addForeignKeyConstraint constraintName="vacancy_to_staff"
+                                 baseColumnNames="contact_person_id" baseTableName="vacancy"
+                                 referencedColumnNames="staff_id" referencedTableName="staff"/>
+    </changeSet>
+
+    <changeSet id="add_column_numnber_of_seat_in_vacancy_table" author="trung.mai">
+        <addColumn tableName="vacancy">
+            <column name="number_of_seat" type="NUMERIC" beforeColumn="education_id"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="rename_expected_start_date_column_in_vacancy_table" author="trung.mai">
+        <renameColumn tableName="vacancy"
+                      oldColumnName="expected_start_day"
+                      newColumnName="expected_start_date"/>
+    </changeSet>
+    <changeSet id="change_datatype_full_description_column_in_vacancy_table" author="trung.mai">
+        <dropColumn tableName="vacancy" columnName="full_description"/>
+        <addColumn tableName="vacancy">
+            <column name="full_description" type="clob" afterColumn="short_description"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="vacancy_table_remove_vacancy_name_column" author="trung.mai">
+        <dropColumn tableName="vacancy" columnName="vacancy_name"/>
+    </changeSet>
+
+    <changeSet id="vacancy_table_set_expected_start_date_nullable" author="trung.mai">
+        <dropNotNullConstraint tableName="vacancy" columnName="expected_start_date"/>
+    </changeSet>
+
+    <changeSet id="vacancy_table_add_search_range_column" author="trung.mai">
+        <addColumn tableName="vacancy">
+            <column name="search_range" type="NUMERIC(2)" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="vacancy_table_set_status_nullable" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy" columnName="status"/>
+    </changeSet>
+
+    <changeSet id="vacancy_table_set_search_range_not_nullable" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy" columnName="search_range"/>
+    </changeSet>
+
+    <changeSet id="vacancy_table_set_data_type_to_nvachar2" author="trung.mai">
+        <modifyDataType tableName="vacancy" columnName="short_description" newDataType="nvarchar2(255)"/>
+    </changeSet>
+
+</databaseChangeLog>

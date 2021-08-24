@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+<changeSet id="add-company-id-column-location-table" author="tnlong">
+    <addColumn tableName="LOCATION">
+        <column name="company_id" type="NUMERIC"/>
+    </addColumn>
+</changeSet>
+<changeSet id="add_foreign_key_in_location_and_company_tables" author="tnlong">
+    <addForeignKeyConstraint baseTableName="LOCATION" baseColumnNames="company_id"
+                             constraintName="fk_location_to_company" referencedTableName="company"
+                             referencedColumnNames="company_id"/>
+</changeSet>
+</databaseChangeLog>

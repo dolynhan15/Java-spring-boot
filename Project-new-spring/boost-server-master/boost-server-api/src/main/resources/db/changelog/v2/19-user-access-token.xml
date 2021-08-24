@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="user_access_token_add_company_id_column" author="trung.mai">
+        <addColumn tableName="USER_ACCESS_TOKEN">
+            <column name="COMPANY_ID" type="NUMERIC" />
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="USER_ACCESS_TOKEN" columnName="COMPANY_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="update_user_access_token_view" author="trung.mai" runOnChange="true">
+        <sqlFile path="/db/sql/create-user-access-token.sql" splitStatements="true" stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>

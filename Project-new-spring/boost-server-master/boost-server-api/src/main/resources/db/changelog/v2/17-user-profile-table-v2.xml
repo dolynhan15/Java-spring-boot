@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-fit-user-language" author="nhphuc">
+        <createTable tableName="USER_FIT_LANGUAGE">
+            <column name="USER_FIT_LANGUAGE_ID" type="NUMBER">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="IS_NATIVE" type="INTEGER" defaultValue="1"/>
+            <column name="LANGUAGE_ID" type="INTEGER">
+                <constraints foreignKeyName="fk-user-fit-language-id" referencedTableName="LANGUAGE"
+                             referencedColumnNames="LANGUAGE_ID" nullable="false"/>
+            </column>
+            <column name="USER_PROFILE_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-user-fit-language-user-id" referencedTableName="USER_PROFILE"
+                             referencedColumnNames="USER_PROFILE_ID" nullable="false"/>
+            </column>
+        </createTable>
+        <sqlFile path="/db/sql/sequence/create-user-fit-language-sequence.sql" splitStatements="true"
+                 stripComments="true" endDelimiter="/"/>
+        <rollback>
+            <dropTable tableName="USER_FIT_LANGUAGE"/>
+            <dropSequence sequenceName="USER_FIT_LANGUAGE_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-created-date-updated-date-to-fit-user-language" author="nhphuc">
+        <addColumn tableName="USER_FIT_LANGUAGE">
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="USER_FIT_LANGUAGE" columnName="CREATED_DATE"/>
+            <dropColumn tableName="USER_FIT_LANGUAGE" columnName="UPDATED_DATE"/>
+            <dropColumn tableName="USER_FIT_LANGUAGE" columnName="CREATED_BY"/>
+            <dropColumn tableName="USER_FIT_LANGUAGE" columnName="UPDATED_BY"/>
+            <dropColumn tableName="USER_FIT_LANGUAGE" columnName="IS_DELETED"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="create-user-fit-column-in-user-profile-table" author="nhphuc">
+        <addColumn tableName="USER_PROFILE">
+            <column name="FIT_FIRST_NAME" type="NVARCHAR2(255)"/>
+            <column name="FIT_LAST_NAME" type="NVARCHAR2(255)"/>
+            <column name="FIT_AVATAR" type="VARCHAR2(2000)"/>
+            <column name="FIT_GENDER" type="INTEGER"/>
+            <column name="FIT_PHONE_NUMBER" type="VARCHAR2(255)"/>
+            <column name="FIT_BIRTHDAY" type="DATETIME"/>
+            <column name="FIT_NATIONAL_ID" type="VARCHAR2(255)"/>
+            <column name="FIT_PERSONAL_PHOTO" type="CLOB"/>
+            <column name="FIT_ADDRESS" type="NVARCHAR2(255)"/>
+            <column name="FIT_PROFILE_STEP" type="INTEGER"/>
+        </addColumn>
+        <rollback>
+            <dropColumn columnName="FIT_FIRST_NAME" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_LAST_NAME" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_AVATAR" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_GENDER" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_PHONE_NUMBER" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_BIRTHDAY" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_NATIONAL_ID" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_PERSONAL_PHOTO" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_ADDRESS" tableName="USER_PROFILE"/>
+            <dropColumn columnName="FIT_PROFILE_STEP" tableName="USER_PROFILE"/>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="vacancy_assessment_level_create_table" author="FALCON_TRUNG">
+        <createTable tableName="vacancy_assessment_level">
+            <column name="vacancy_assessment_level_id" type="NUMERIC"/>
+            <column name="assessment_level_id" type="NUMERIC"/>
+            <column name="vacancy_id" type="NUMERIC"/>
+            <column name="is_deleted" type="NUMERIC"/>
+            <column name="created_by" type="NUMERIC"/>
+            <column name="created_date" type="TIMESTAMP(6)"/>
+            <column name="updated_by" type="NUMERIC"/>
+            <column name="updated_date" type="TIMESTAMP(6)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_vacancy_assessment_level_id" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy_assessment_level" columnName="vacancy_assessment_level_id"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_assessment_level_id" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy_assessment_level" columnName="assessment_level_id"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_vacancy_id" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy_assessment_level" columnName="vacancy_id"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_is_deleted" author="trung.mai">
+        <addNotNullConstraint tableName="vacancy_assessment_level" columnName="is_deleted"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_primary_key" author="trung.mai">
+        <addPrimaryKey tableName="vacancy_assessment_level" columnNames="vacancy_assessment_level_id"
+                       constraintName="vacancy_asmt_lv_pk"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_foreign_key_to_assessment_level" author="trung.mai">
+        <addForeignKeyConstraint constraintName="vacancy_asmt_lv_to_asmt_lv"
+                                 baseColumnNames="assessment_level_id" baseTableName="vacancy_assessment_level"
+                                 referencedColumnNames="assessment_level_id" referencedTableName="assessment_level"/>
+    </changeSet>
+
+    <changeSet id="vacancy_assessment_level_table_set_foreign_key_to_vacancy" author="trung.mai">
+        <addForeignKeyConstraint constraintName="vacancy_asmt_lv_to_vacancy"
+                                 baseColumnNames="vacancy_id" baseTableName="vacancy_assessment_level"
+                                 referencedColumnNames="vacancy_id" referencedTableName="vacancy"/>
+    </changeSet>
+</databaseChangeLog>

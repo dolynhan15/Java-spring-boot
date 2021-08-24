@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(ID),0)  + 1
+    INTO seqval
+    FROM VACANCY_SEAT;
+   
+  
+    execute immediate('CREATE SEQUENCE VACANCY_SEAT_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="update-min-max-salary-range-in-vacancy" author="nhphuc">
+        <sql><![CDATA[ UPDATE (SELECT v.SALARY AS OLD_VALUE, c.MIN_SALARY FROM VACANCY v JOIN CURRENCY c ON c.CURRENCY_ID = v.CURRENCY_ID WHERE v.SALARY < c.MIN_SALARY) t  SET t.OLD_VALUE = t.MIN_SALARY ]]></sql>
+
+        <sql><![CDATA[ UPDATE (SELECT v.SALARY_MAX AS OLD_VALUE, c.MAX_SALARY FROM VACANCY v JOIN CURRENCY c ON c.CURRENCY_ID = v.CURRENCY_ID WHERE v.SALARY_MAX > c.MAX_SALARY) t  SET t.OLD_VALUE = t.MAX_SALARY ]]></sql>
+    </changeSet>
+
+    <changeSet id="update-min-max-salary-range-in-user-cv" author="nhphuc">
+        <sql><![CDATA[ UPDATE (SELECT cv.MIN_SALARY AS OLD_VALUE, c.MIN_SALARY FROM USER_CURRICULUM_VITAE cv JOIN CURRENCY c ON c.CURRENCY_ID = cv.CURRENCY_ID WHERE cv.MIN_SALARY < c.MIN_SALARY) t  SET t.OLD_VALUE = t.MIN_SALARY ]]></sql>
+
+        <sql><![CDATA[ UPDATE (SELECT cv.MAX_SALARY AS OLD_VALUE, c.MAX_SALARY FROM USER_CURRICULUM_VITAE cv JOIN CURRENCY c ON c.CURRENCY_ID = cv.CURRENCY_ID WHERE cv.MAX_SALARY > c.MAX_SALARY) t  SET t.OLD_VALUE = t.MAX_SALARY ]]></sql>
+    </changeSet>
+
+
+</databaseChangeLog>

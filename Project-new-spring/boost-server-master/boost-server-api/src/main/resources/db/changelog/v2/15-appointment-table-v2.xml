@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="appointment-table-drop-nullable-location-id-column" author="dlly">
+        <dropNotNullConstraint tableName="APPOINTMENT" columnName="LOCATION_ID"/>
+    </changeSet>
+
+    <changeSet id="appointment-table-drop-nullable-appointment-date-column" author="dlly">
+        <dropNotNullConstraint tableName="APPOINTMENT" columnName="APPOINTMENT_DATE"/>
+    </changeSet>
+
+    <changeSet id="appointment-table-add-type-column" author="dlly">
+        <addColumn tableName="APPOINTMENT">
+            <column name="TYPE" type="INTEGER"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="appointment-table-add-from-date-column" author="dlly">
+        <addColumn tableName="APPOINTMENT">
+            <column name="FROM_DATE" type="TIMESTAMP"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="update-to-nullable-for-appointment-time-in-appointment-detail-table" author="nhphuc">
+        <dropNotNullConstraint tableName="APPOINTMENT_DETAIL" columnName="APPOINTMENT_TIME"/>
+    </changeSet>
+
+    <changeSet id="update-appointment-type-for-old-appointment" author="nhphuc">
+        <update tableName="APPOINTMENT">
+            <column name="TYPE" type="INTEGER" value="1"/>
+            <where>TYPE IS NULL</where>
+        </update>
+        <addNotNullConstraint tableName="APPOINTMENT" columnName="TYPE" columnDataType="INTEGER" defaultNullValue="1"/>
+    </changeSet>
+
+    <changeSet id="insert-appointment-date-range-for-old-appointment" author="nhphuc">
+        <sql>
+            INSERT INTO APPOINTMENT_DATE_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_DATE, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_DATE_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '1' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '2' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '3' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '4' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '5' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '6' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '7' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '8' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '9' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '10' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '11' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '12' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '13' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '14' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '15' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '16' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '17' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '18' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '19' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '20' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '21' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '22' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+        <sql>
+            INSERT INTO APPOINTMENT_TIME_RANGE (ID ,APPOINTMENT_ID, APPOINTMENT_TIME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE)
+            SELECT APPOINTMENT_TIME_RANGE_SEQ.nextval, a.APPOINTMENT_ID, a.APPOINTMENT_DATE + INTERVAL '23' HOUR, a.CREATED_BY, a.CREATED_DATE, a.UPDATED_BY, a.UPDATED_DATE
+            FROM APPOINTMENT a;
+        </sql>
+    </changeSet>
+
+    <changeSet id="update-from-date-in-appointment-table" author="nhphuc">
+        <sql>
+            UPDATE APPOINTMENT SET APPOINTMENT_DATE = (SELECT MAX(APPOINTMENT_DATE) + INTERVAL '23' HOUR + INTERVAL '59' MINUTE + INTERVAL '59' SECOND
+            FROM APPOINTMENT_DATE_RANGE
+            WHERE APPOINTMENT.APPOINTMENT_ID = APPOINTMENT_DATE_RANGE.APPOINTMENT_ID)
+            WHERE APPOINTMENT.FROM_DATE IS NULL;
+        </sql>
+        <sql>
+            UPDATE APPOINTMENT SET FROM_DATE = (SELECT MIN(APPOINTMENT_DATE)
+            FROM APPOINTMENT_DATE_RANGE
+            WHERE APPOINTMENT.APPOINTMENT_ID = APPOINTMENT_DATE_RANGE.APPOINTMENT_ID)
+            WHERE APPOINTMENT.FROM_DATE IS NULL;
+        </sql>
+    </changeSet>
+
+    <changeSet id="appointment-table-run-update-appointment-date-base-on-appointment-time" author="trung.mai">
+        <sqlFile path="/db/sql/update-appointment-date-base-on-appointment-time.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="appointment-table-run-update-appointment-date-after-fix-bug-convert-UTC-two-times" author="dlly">
+        <sqlFile path="/db/sql/update-appointment-date-base-on-appointment-time.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+</databaseChangeLog>

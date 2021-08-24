@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <!--        <link rel="stylesheet" type="text/css" media="print" href="style.css"/>-->
+    <style>
+        body {
+            font-family: "Arial Unicode MS";
+            font-size: 12px;
+            border: 0;
+            margin: 0;
+            vertical-align: baseline;
+            color: #222;
+        }
+
+        @page {
+
+            @top-right {
+                content: element(header);
+                vertical-align: bottom;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            margin: 0;
+            margin-top: 79px;
+            margin-bottom: 79px;
+            size: A4 portrait;
+        }
+
+        @page :first {
+            margin: 0;
+            margin-bottom: 60px;
+            @top-right {
+                content: element(firstPageFooter);
+                vertical-align: bottom;
+                padding: 0;
+                margin: 0;
+            }
+            @top-right {
+                content: element(summary);
+                vertical-align: bottom;
+                padding-left: 0;
+                padding-right: 0;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+
+            @bottom-center { content: element(footer) }
+        }
+        /*@page {*/
+        /*    */
+        /*}*/
+        div#footer {
+            display: block; text-align: center;
+            position: running(footer);
+        }
+        div.header {
+            position: running(header);
+        }
+
+        div.violet-panel {
+            position: running(violet-panel);
+        }
+
+        div#summary {
+            position: running(summary);
+        }
+
+        #pagenumber:before {
+            content: counter(page);
+        }
+
+        #pagenumber_x:before {
+            content: counter(page);
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
+        .next-page {
+            page-break-before: always
+        }
+
+        .header-container {
+            position: absolute;
+            width: 100%;
+            height: 69px;
+            left: 0;
+            top: 0;
+            background: #3F0129;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+        }
+
+        .select-logo {
+            position: absolute;
+            left: 14px;
+            top: 10px;
+            width: 38px;
+            height: 41px;
+        }
+
+        .page-count {
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            right: 32px;
+            top: 11px;
+
+            background: #FFFFFF;
+            border: 0.1px solid #000000;
+            box-sizing: border-box;
+            border-radius: 50%;
+            text-align: center;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .page-count #pagenumber {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 3px;
+        }
+
+        .header-basic-info {
+            position: absolute;
+            left: 87px;
+            top: 5px;
+            width: 200px;
+            padding-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .header-basic-info .user-name {
+            font-size: 18px;
+            line-height: 22px;
+            color: #FFFFFF;
+
+        }
+
+        .header-basic-info .vacancy-job {
+            top: 2px;
+            font-size: 14px;
+            line-height: 17px;
+            color: #FFFFFF;
+        }
+
+        .header-contact {
+            position: absolute;
+            top: 6px;
+            left: 320px;
+        }
+
+        .header-contact-user-phone {
+            font-size: 14px;
+            line-height: 17px;
+            color: #FFFFFF;
+            margin-bottom: 7px;
+        }
+
+        .header-contact-user-email {
+            font-size: 14px;
+            line-height: 17px;
+            color: #FFFFFF;
+        }
+
+        .header-contact-ic {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .header-contact-text {
+            left: 32px;
+            margin: auto;
+            /* additional */
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        #cv {
+        }
+
+        div#summary {
+            width: 235px;
+            background: #3F0129;
+            float: left;
+            /*height: 841.5px;*/
+            height: 781.5px;
+            color: #FFFFFF;
+            margin-right: 40px;
+            vertical-align: middle;
+        }
+
+        div#user-info {
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 79px;
+        }
+
+        .user-avatar {
+            height: 180px;
+        }
+
+        .summary-section-divider {
+            width: 187px;
+            height: 1px;
+            margin-top: 12px;
+        }
+
+        .user-avatar-divider {
+            height: 2px;
+            width: 235px;
+            margin-top: 188px;
+        }
+
+        .circle-user-avatar {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            left: 57px;
+            top: 30px;
+        }
+
+        #circle-border {
+            z-index: 1;
+        }
+
+        .user-contact {
+            margin-top: 25px;
+            padding-left: 36px;
+            padding-right: 10px;
+        }
+
+        .user-phone {
+            font-size: 14px;
+            line-height: 17px;
+            margin-bottom: 8px;
+        }
+
+        .user-email {
+            font-size: 14px;
+            line-height: 17px;
+            margin-bottom: 8px;
+        }
+
+        .user-location {
+            font-size: 14px;
+            line-height: 17px;
+            margin-bottom: 8px;
+        }
+
+        .contact-ic {
+            width: 24px;
+            height: 24px;
+            margin-right: 4px;
+            display: inline-block;
+            vertical-align: middle;
+
+        }
+
+        .contact-text {
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 155px;
+            margin: 0;
+        }
+
+        .qualification-ic {
+            width: 50px;
+            height: 50px;
+        }
+
+        .user-qualification {
+            padding-top: 16px;
+            padding-left: 36px;
+            padding-right: 12px;
+        }
+
+        .attribute-level-ic {
+            width: 5px;
+            height: 5px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .attribute-text {
+            padding-right: 5px;
+            font-size: 14px;
+            line-height: 17px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px 0 0;
+            max-width: 104px;
+        }
+
+        .user-contact-title {
+            margin: 0 0 24px;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1em;
+        }
+
+        .user-qualification-title {
+            margin: 0 0 8px;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1em;
+        }
+
+        .user-attribute-title {
+            margin: 0 0 8px;
+            font-size: 20px;
+            line-height: 24px;
+            letter-spacing: 0.1em;
+        }
+
+        .user-attribute {
+            padding-top: 16px;
+            padding-left: 36px;
+            padding-right: 12px;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        tr {
+            padding: 5px;
+        }
+
+        #candidate-name {
+            font-size: 24px;
+            line-height: 29px;
+            margin-bottom: 5px;
+        }
+
+        #vacancy-job {
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            line-height: 17px;
+            margin: 0;
+            letter-spacing: 0.1em;
+        }
+
+        .work-item {
+            margin-top: 7px;
+            margin-bottom: 10px;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 17px;
+            margin: 5px 0 0;
+        }
+
+        .company-section-title {
+            font-size: 18px;
+            line-height: 120%;
+            margin: 0;
+        }
+
+        .position-section-title {
+            font-size: 16px;
+            line-height: 100%;
+            /* or 16px */
+
+            letter-spacing: 0.1em;
+            margin: 5px 0 0;
+            color: #4269A3;
+        }
+
+        .duration-section-title {
+            font-size: 14px;
+            line-height: 20px;
+            /* identical to box height, or 143% */
+            margin: 5px 0 0;
+            color: #A6A6A6;
+        }
+
+        .vacancy-candidate {
+            margin-top: 40px;
+        }
+
+        .salary-section {
+            margin-top: 26px;
+        }
+
+        .availability-section {
+            margin-top: 17px;
+        }
+
+        .native-language-section {
+            margin-top: 18px;
+        }
+
+        .language-section {
+            margin-top: 15px;
+        }
+
+        .education-section {
+            margin-top: 15px;
+        }
+
+        .work-experience-section {
+            margin-top: 17px;
+        }
+
+        .work-item {
+            margin-top: 15px;
+        }
+
+        .desired-working-hour-section {
+            margin-top: 15px;
+        }
+
+        .soft-skill-section {
+            margin-top: 15px;
+        }
+
+        .benefit-section {
+            margin-top: 15px;
+        }
+
+        .personality-item {
+            margin-top: 15px;
+        }
+
+        .qualification-cell {
+            padding-top: 0;
+            padding-bottom: 10px;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        .attributes {
+            margin: 0;
+            padding: 0;
+        }
+
+        .attribute-level-container {
+            margin-bottom: 8px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        #avatar-img {
+            max-width: 120px;
+            max-height: 120px;
+        }
+
+
+
+        .violet-panel {
+            background: #3F0129;
+            width: 235px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: -1px;
+        }
+    </style>
+</head>
+
+<body>
+<div class='header'
+     th:include="header.html::header(${data.getDisplayName()},${data.getJob()},${data.getPhone()},${data.getEmail()})"></div>
+<div id="firstPageFooter">
+    <img class="select-logo" th:src="@{|${baseUrl}/images/select-logo.png|}" alt="logo"/>
+    <div class="page-count">
+        <p id="pagenumber"></p>
+    </div>
+
+</div>
+
+<div id='footer'>
+    <img class="violet-panel" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO0Z9T8DwACWgFqzSNL/QAAAABJRU5ErkJggg=="/>
+</div>
+<div id="cv">
+
+    <div id="summary">
+
+        <div class="user-avatar">
+            <img class="circle-user-avatar" id="circle-border" th:src="@{|${baseUrl}/images/circle-image.png|}"/>
+            <img class="circle-user-avatar" id="avatar-img" th:src="@{${data.getUserAvatar()}}"/>
+            <img class="user-avatar-divider" th:src="@{|${baseUrl}/images/black-divider.png|}"/>
+        </div>
+
+        <div class="user-contact">
+            <p class="user-contact-title">CONTACTS</p>
+            <div class="user-phone" th:unless="${#strings.isEmpty(data.getPhone())}">
+                <img class="contact-ic" th:src="@{|${baseUrl}/images/phone.png|}">
+                <p class="contact-text" th:text="${data.getPhone()}">getPhone</p>
+            </div>
+            <div class="user-email" th:unless="${#strings.isEmpty(data.getEmail())}">
+                <img class="contact-ic" th:src="@{|${baseUrl}/images/email.png|}">
+                <p class="contact-text" th:text="${data.getEmail()}">getEmail</p>
+            </div>
+            <div class="user-location" th:unless="${#strings.isEmpty(data.getLocation())}">
+                <img class="contact-ic" th:src="@{|${baseUrl}/images/location.png|}">
+                <p class="contact-text" th:text="${data.getLocation()}">getLocation</p>
+            </div>
+            <div>
+                <img class="summary-section-divider" th:src="@{|${baseUrl}/images/white-divider.png|}">
+            </div>
+        </div>
+
+        <div class="user-qualification" th:unless="${#lists.isEmpty(data.getQualifications())}">
+            <p class="user-qualification-title">QUALIFICATIONS</p>
+            <table class="qualifications">
+                <tr th:each="qualification : ${data.getQualifications()}">
+                    <td class="qualification-cell" th:each="level: ${qualification}" th:switch="${level}">
+                        <img class="qualification-ic" th:case="1" th:src="@{|${baseUrl}/images/cert-a1.png|}">
+                        <img class="qualification-ic" th:case="2" th:src="@{|${baseUrl}/images/cert-a2.png|}">
+                        <img class="qualification-ic" th:case="3" th:src="@{|${baseUrl}/images/cert-b1.png|}">
+                        <img class="qualification-ic" th:case="4" th:src="@{|${baseUrl}/images/cert-b2.png|}">
+                        <img class="qualification-ic" th:case="*" th:src="@{|${baseUrl}/images/cert-gt-b2.png|}">
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <img class="summary-section-divider" th:src="@{|${baseUrl}/images/white-divider.png|}">
+            </div>
+        </div>
+        <div class="user-attribute" th:unless="${#lists.isEmpty(data.getAttributes())}">
+            <p class="user-attribute-title">SKILLS</p>
+            <ul class="attributes">
+                <li th:each="attribute: ${data.getAttributes()}">
+                    <div class="attribute-level-container">
+                        <span class="attribute-text" th:text="${attribute.getName()}">attribute name</span>
+                        <img th:if="${attribute.getLevels().get('1') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('2') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('3') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('4') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('5') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('6') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('7') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('8') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                        <img th:if="${attribute.getLevels().get('9') == true}" class="attribute-level-ic" th:src="@{|${baseUrl}/images/point.png|}">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="user-info">
+
+        <div class="vacancy-candidate">
+            <p id="candidate-name" th:text="${data.getDisplayName()}">candidate-name</p>
+            <p id="vacancy-job" th:text="${#strings.toUpperCase(data.getJob())}">vacancy-job</p>
+        </div>
+
+        <div class="salary-section" th:if="${#bools.isTrue(data.isShowDesiredSalary())}">
+            <p class="section-title">DESIRED SALARY</p>
+            <p class="section-content"
+               th:text="${data.isHourlySalary()}? ${data.getDesiredSalaryHourly()} : ${data.getDesiredSalaryMonthly()}">
+                desired salary</p>
+        </div>
+
+        <div class="availability-section" th:unless="${#strings.isEmpty(data.getStartDateFormatted())}">
+            <p class="section-title">AVAILABILITY</p>
+            <p class="section-content" th:text="${data.getStartDateFormatted()}">availability</p>
+        </div>
+
+        <div class="native-language-section" th:unless="${#strings.isEmpty(data.getNativeLanguagesFormatted())}">
+            <p class="section-title">NATIVE LANGUAGES</p>
+            <p class="section-content" th:text="${data.getNativeLanguagesFormatted()}">native languages</p>
+        </div>
+
+        <div class="language-section" th:unless="${#strings.isEmpty(data.getLanguagesFormatted())}">
+            <p class="section-title">LANGUAGES</p>
+            <p class="section-content" th:text="${data.getLanguagesFormatted()}">languages</p>
+        </div>
+
+        <div class="education-section" th:unless="${#strings.isEmpty(data.getEducation())}">
+            <p class="section-title">EDUCATION</p>
+            <p class="section-content" th:text="${data.getEducation()}">education</p>
+        </div>
+
+        <div class="work-experience-section" th:unless="${#lists.isEmpty(data.getUserPreviousPositions())}">
+            <p class="section-title">WORK EXPERIENCE</p>
+            <div class="work-item" th:each="previousPosition: ${data.getPreviousPositions()}">
+                <p class="company-section-title" th:text="${previousPosition.getCompanyName()}">
+                    company-section-title</p>
+                <p class="position-section-title" th:text="${previousPosition.getPositionName()}">
+                    position-section-title</p>
+                <p class="duration-section-title">
+                    <span th:text="${#dates.format(previousPosition.getStartDate(), 'MMM yyyy')}">MMM yyyy</span>
+                    <span th:text="' - '">-</span>
+                    <span th:text="${previousPosition.isCurrent()}? 'Present' : ${#dates.format(previousPosition.getEndDate(), 'MMM yyyy')}">-</span>
+                </p>
+                <p class="section-content" th:unless="${#strings.isEmpty(previousPosition.getContactPerson())}"
+                   th:text="'Contact person: ' + ${previousPosition.getContactPerson()}"></p>
+            </div>
+        </div>
+
+        <div class="desired-working-hour-section" th:unless="${#lists.isEmpty(data.getWorkingHours())}">
+            <p class="section-title">DESIRED WORKING HOURS</p>
+            <div class="working-hour-item" th:each="workingHour: ${data.getWorkingHours()}">
+                <p class="section-content" th:text="${workingHour}">desired working hours</p>
+            </div>
+        </div>
+
+        <div class="soft-skill-section" th:unless="${#strings.isEmpty(data.getSoftSkillsFormatted())}">
+            <p class="section-title">SOFT SKILLS</p>
+            <p class="section-content" th:text="${data.getSoftSkillsFormatted()}">soft skills</p>
+        </div>
+
+        <div class="benefit-section" th:unless="${#strings.isEmpty(data.getBenefitsFormatted())}">
+            <p class="section-title">BENEFITS</p>
+            <p class="section-content" th:text="${data.getBenefitsFormatted()}">benefits</p>
+        </div>
+
+        <div class="personality-section" th:if="${#bools.isTrue(data.isShowPersonality())}">
+            <div class="personality-item" th:each="personality: ${data.getPersonalities()}">
+                <p class="section-title" th:text="${#strings.toUpperCase(personality.getName())}">PERSONALITY</p>
+                <p class="section-content" th:text="${personality.getScoreFormatted()}">getScoreFormatted</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

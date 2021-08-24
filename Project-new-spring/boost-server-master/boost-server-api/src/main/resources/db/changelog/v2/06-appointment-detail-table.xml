@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="appointment-detail-table-create-table" author="trung.mai">
+        <createTable tableName="APPOINTMENT_DETAIL">
+            <column name="APPOINTMENT_DETAIL_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRICULUM_VITAE_ID" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_TIME" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="appointment-detail-table-add-primery-key" author="trung.mai">
+        <addPrimaryKey tableName="APPOINTMENT_DETAIL" columnNames="APPOINTMENT_DETAIL_ID" constraintName="APPOINTMENT_DETAIL_PK"/>
+    </changeSet>
+
+    <changeSet id="appointment-detail-table-add-foreign-key-for-appointment" author="trung.mai">
+        <addForeignKeyConstraint constraintName="APTM_DETAIL_TO_APPOINTMENT"
+                                 baseTableName="APPOINTMENT_DETAIL" baseColumnNames="APPOINTMENT_ID"
+                                 referencedTableName="APPOINTMENT" referencedColumnNames="APPOINTMENT_ID"/>
+    </changeSet>
+
+    <changeSet id="appointment-detail-table-add-foreign-key-for-user-cv-id" author="trung.mai">
+        <addForeignKeyConstraint constraintName="APTM_DETAIL_TO_USER_CV"
+                                 baseTableName="APPOINTMENT_DETAIL" baseColumnNames="CURRICULUM_VITAE_ID"
+                                 referencedTableName="USER_CURRICULUM_VITAE" referencedColumnNames="CURRICULUM_VITAE_ID"/>
+    </changeSet>
+
+    <changeSet id="appointment-detail-table-add-sequence" author="trung.mai">
+        <sqlFile path="/db/sql/sequence/create-appointment-detail-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-function-get-start-day-in-timezone" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/function/create-get-date-time-in-utc-of-timezone.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    <changeSet id="appointment-detail-add-status-colunm" author="trung.mai">
+        <addColumn tableName="APPOINTMENT_DETAIL">
+            <column name="STATUS" type="NUMBER" remarks="PENDING(1),  ACCEPTED(2),   DECLINED(3),    CANCELED(4),    CHANGED(5)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-get-expired-date-of-appointment-in-utc" author="nhphuc">
+        <sqlFile path="/db/sql/function/create-get-expired-date-of-appointment-in-utc.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+</databaseChangeLog>

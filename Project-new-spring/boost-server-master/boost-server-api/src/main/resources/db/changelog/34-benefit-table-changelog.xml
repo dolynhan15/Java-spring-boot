@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="benefit_table_insert_data" author="trung.mai" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/benefit.csv"
+                        separator=","
+                        tableName="BENEFIT" primaryKey="BENEFIT_ID">
+
+            <column name="BENEFIT_ID" type="NUMERIC" />
+            <column name="NAME" type="STRING" />
+            <column name="DESCRIPTION" type="STRING" />
+            <column name="CREATED_DATE" type="STRING" />
+            <column name="UPDATED_DATE" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

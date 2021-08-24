@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-phone-code-column-in-country-table" author="dlly">
+        <addColumn tableName="COUNTRY">
+            <column name="PHONE_CODE" type="VARCHAR2(10)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="insert-data-in-country-table" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/country.csv"
+                        separator=","
+                        tableName="COUNTRY" primaryKey="COUNTRY_ID">
+            <column name="COUNTRY_ID" type="NUMERIC"/>
+            <column name="COUNTRY_NAME" type="STRING"/>
+            <column name="COUNTRY_CODE" type="STRING"/>
+            <column name="PHONE_CODE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="add-not-null-constraint-for-phone-code-column-in-country-table" author="dlly">
+        <addNotNullConstraint tableName="COUNTRY" columnName="PHONE_CODE"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-personal-assessment-table" author="nhphuc">
+        <createTable tableName="ASSESSMENT_PERSONAL">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME_EN_US" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="NAME_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="NAME_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="NAME_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="NAME_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="NAME_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="NAME_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="NAME_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC" defaultValue="0"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="ASSESSMENT_PERSONAL"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add_personal_assessment_question_table" author="nhphuc">
+        <createTable tableName="ASSESSMENT_PERSONAL_QUESTION">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ASSESSMENT_PERSONAL_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk_personal_question_id" nullable="false"
+                             referencedTableName="ASSESSMENT_PERSONAL" referencedColumnNames="ID"/>
+            </column>
+            <column name="CONTENT_EN_US" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTENT_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="CONTENT_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="QUESTION_TYPE" type="NUMERIC" defaultValue="1"/>
+            <column name="MIN_VALUE" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MAX_VALUE" type="NUMERIC" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_REVERSED" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC" defaultValue="0"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="ASSESSMENT_PERSONAL_QUESTION"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-user-personality-table" author="nhphuc">
+        <createTable tableName="USER_PERSONALITY">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PERSONAL_QUESTION_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk_user_personality_1" nullable="false"
+                             referencedTableName="ASSESSMENT_PERSONAL_QUESTION" referencedColumnNames="ID"/>
+            </column>
+            <column name="ANSWER_VALUE" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIME_TO_ANSWER" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC">
+                <constraints foreignKeyName="fk_user_personality_2" nullable="false"
+                             referencedTableName="USER_PROFILE" referencedColumnNames="USER_PROFILE_ID"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC" defaultValue="0"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="USER_PERSONALITY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-is-tested-personal-assessment-to-user-curriculumn-table" author="nhphuc">
+        <addColumn tableName="USER_CURRICULUM_VITAE">
+            <column name="HAS_PERSONALITY" defaultValue="0" type="NUMERIC">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="USER_CURRICULUM_VITAE" columnName="HAS_PERSONALITY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-full-name-and-description-and-code-name-and-type-graph-in-personal-assessment-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_PERSONAL">
+            <column name="FULL_NAME_EN_US" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="FULL_NAME_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_EN_US" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="DESCRIPTION_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="CODE_NAME" type="NVARCHAR2(255)"/>
+            <column name="TYPE_GRAPH" type="NUMERIC" defaultValue="1"/>
+        </addColumn>
+
+        <rollback>
+            <dropTable tableName="ASSESSMENT_PERSONAL"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add_personal_assessment_id_into_user_personality_table" author="nhphuc">
+        <addColumn tableName="USER_PERSONALITY">
+            <column name="ASSESSMENT_PERSONAL_ID" type="NUMERIC"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add_quality_type_into_user_personality_table" author="dlly">
+        <addColumn tableName="ASSESSMENT_PERSONAL_QUESTION">
+            <column name="QUALITY_TYPE" type="NUMERIC"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-assessment-quality-type-table" author="nhphuc">
+        <createTable tableName="ASSESSMENT_QUALITY_TYPE">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ASSESSMENT_PERSONAL_ID" type="NUMERIC">
+                <constraints nullable="false" foreignKeyName="fk-assessment-question-type-1"
+                             referencedTableName="ASSESSMENT_PERSONAL_QUESTION" referencedColumnNames="ID"/>
+            </column>
+            <column name="QUALITY_TYPE" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEFAULT_VALUE" type="NUMERIC" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_EN_US" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME_ZH_CN" type="NVARCHAR2(255)"/>
+            <column name="NAME_ZH_TW" type="NVARCHAR2(255)"/>
+            <column name="NAME_ID_ID" type="NVARCHAR2(255)"/>
+            <column name="NAME_JA_JP" type="NVARCHAR2(255)"/>
+            <column name="NAME_MS_MY" type="NVARCHAR2(255)"/>
+            <column name="NAME_TH_TH" type="NVARCHAR2(255)"/>
+            <column name="NAME_VI_VN" type="NVARCHAR2(255)"/>
+            <column name="NAME_KO_KR" type="NVARCHAR2(255)"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="TIMESTAMP"/>
+            <column name="IS_DELETED" type="NUMERIC" defaultValue="0"/>
+        </createTable>
+            <sqlFile path="/db/sql/sequence/create-assessment-quality-type-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+        <rollback>
+            <dropTable tableName="ASSESSMENT_QUALITY_TYPE"/>
+            <dropSequence sequenceName="ASSESSMENT_QUALITY_TYPE_SEQ"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="update-foreign-key-for-assessment-personal-type" author="nhphuc">
+        <dropForeignKeyConstraint baseTableName="ASSESSMENT_QUALITY_TYPE" constraintName="fk-assessment-question-type-1"/>
+        <addForeignKeyConstraint baseTableName="ASSESSMENT_QUALITY_TYPE" baseColumnNames="ASSESSMENT_PERSONAL_ID" constraintName="fk-personal-assessment-id" referencedTableName="ASSESSMENT_PERSONAL"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+    <changeSet id="link-assessment-question-to-personal-assessment-question-type-table" author="nhphuc">
+        <addColumn tableName="ASSESSMENT_PERSONAL_QUESTION">
+            <column name="ASSESSMENT_QUALITY_TYPE_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-assessment-quality-type-1"
+                             referencedTableName="ASSESSMENT_QUALITY_TYPE" referencedColumnNames="ID"/>
+            </column>
+        </addColumn>
+        <dropColumn tableName="ASSESSMENT_PERSONAL_QUESTION" columnName="ASSESSMENT_PERSONAL_ID"/>
+        <rollback>
+            <addColumn tableName="ASSESSMENT_PERSONAL_QUESTION">
+                <column name="ASSESSMENT_PERSONAL_ID" type="NUMERIC"/>
+            </addColumn>
+            <dropColumn tableName="ASSESSMENT_PERSONAL_QUESTION" columnName="ASSESSMENT_QUALITY_TYPE_ID"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="add-value-rate-into-assessment-personal-question-table" author="nhphuc">
+        <addColumn tableName="ASSESSMENT_PERSONAL_QUESTION">
+            <column name="VALUE_RATE" type="NUMERIC"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="ASSESSMENT_PERSONAL_QUESTION" columnName="VALUE_RATE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="load-personal-assessment-data" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/assessment-personal.csv"
+                        separator=","
+                        tableName="ASSESSMENT_PERSONAL" primaryKey="ID">
+            <column name="ID" type="NUMERIC"/>
+            <column name="NAME_EN_US" type="STRING"/>
+            <column name="NAME_ZH_CN" type="STRING"/>
+            <column name="NAME_ZH_TW" type="STRING"/>
+            <column name="NAME_ID_ID" type="STRING"/>
+            <column name="NAME_JA_JP" type="STRING"/>
+            <column name="NAME_MS_MY" type="STRING"/>
+            <column name="NAME_TH_TH" type="STRING"/>
+            <column name="NAME_VI_VN" type="STRING"/>
+            <column name="NAME_KO_KR" type="STRING"/>
+            <column name="FULL_NAME_EN_US" type="STRING"/>
+            <column name="FULL_NAME_ZH_CN" type="STRING"/>
+            <column name="FULL_NAME_ZH_TW" type="STRING"/>
+            <column name="FULL_NAME_ID_ID" type="STRING"/>
+            <column name="FULL_NAME_JA_JP" type="STRING"/>
+            <column name="FULL_NAME_MS_MY" type="STRING"/>
+            <column name="FULL_NAME_TH_TH" type="STRING"/>
+            <column name="FULL_NAME_VI_VN" type="STRING"/>
+            <column name="FULL_NAME_KO_KR" type="STRING"/>
+            <column name="DESCRIPTION_EN_US" type="STRING"/>
+            <column name="DESCRIPTION_ZH_CN" type="STRING"/>
+            <column name="DESCRIPTION_ZH_TW" type="STRING"/>
+            <column name="DESCRIPTION_ID_ID" type="STRING"/>
+            <column name="DESCRIPTION_JA_JP" type="STRING"/>
+            <column name="DESCRIPTION_MS_MY" type="STRING"/>
+            <column name="DESCRIPTION_TH_TH" type="STRING"/>
+            <column name="DESCRIPTION_VI_VN" type="STRING"/>
+            <column name="DESCRIPTION_KO_KR" type="STRING"/>
+            <column name="CODE_NAME" type="STRING"/>
+            <column name="TYPE_GRAPH" type="NUMERIC"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="STRING"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load-personal-assessment-question-type-table" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/assessment-quality-type.csv"
+                        separator=","
+                        tableName="ASSESSMENT_QUALITY_TYPE" primaryKey="ID">
+            <column name="ID" type="NUMERIC" />
+            <column name="ASSESSMENT_PERSONAL_ID" type="NUMERIC"/>
+            <column name="QUALITY_TYPE" type="NUMERIC"/>
+            <column name="DEFAULT_VALUE" type="NUMERIC"/>
+            <column name="NAME_EN_US" type="STRING"/>
+            <column name="NAME_ZH_CN" type="STRING"/>
+            <column name="NAME_ZH_TW" type="STRING"/>
+            <column name="NAME_ID_ID" type="STRING"/>
+            <column name="NAME_JA_JP" type="STRING"/>
+            <column name="NAME_MS_MY" type="STRING"/>
+            <column name="NAME_TH_TH" type="STRING"/>
+            <column name="NAME_VI_VN" type="STRING"/>
+            <column name="NAME_KO_KR" type="STRING"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="STRING"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load-personal-assessment-question-data" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/assessment-personal-question.csv"
+                        separator=","
+                        tableName="ASSESSMENT_PERSONAL_QUESTION" primaryKey="ID">
+            <column name="ID" type="NUMERIC"/>
+            <column name="ASSESSMENT_QUALITY_TYPE_ID" type="NUMERIC"/>
+            <column name="CONTENT_EN_US" type="STRING"/>
+            <column name="CONTENT_ZH_CN" type="STRING"/>
+            <column name="CONTENT_ZH_TW" type="STRING"/>
+            <column name="CONTENT_ID_ID" type="STRING"/>
+            <column name="CONTENT_JA_JP" type="STRING"/>
+            <column name="CONTENT_MS_MY" type="STRING"/>
+            <column name="CONTENT_TH_TH" type="STRING"/>
+            <column name="CONTENT_VI_VN" type="STRING"/>
+            <column name="CONTENT_KO_KR" type="STRING"/>
+            <column name="QUESTION_TYPE" type="NUMERIC"/>
+            <column name="QUALITY_TYPE" type="NUMERIC"/>
+            <column name="VALUE_RATE" type="NUMERIC"/>
+            <column name="MIN_VALUE" type="NUMERIC"/>
+            <column name="MAX_VALUE" type="NUMERIC"/>
+            <column name="IS_REVERSED" type="NUMERIC"/>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="STRING"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_DATE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

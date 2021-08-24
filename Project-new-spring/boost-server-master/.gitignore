@@ -1,0 +1,29 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+!boost-server-api/libs/*.jar
+!boost-server-message/libs/*.jar
+!libs/*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+target
+boost-server-api/target
+boost-server-message/target
+
+# IDE files
+.idea
+*.iml
+
+boost-server-api/logs/*
+boost-server-message/logs/*
+logs/*
+
+boost-server-api/src/main/resources/application.properties

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="insert-symbol-currency-table" author="tnlong" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                  file="/db/csv/currency.csv"
+                  separator=","
+                  tableName="currency" primaryKey="CURRENCY_ID">
+            <column name="CURRENCY_ID" type="NUMERIC" />
+            <column name="CODE" type="STRING" />
+            <column name="NAME" type="STRING" />
+            <column name="UNIT_PER_USD" type="NUMERIC" />
+            <column name="USD_PER_UNIT" type="NUMERIC" />
+            <column name="MIN_SALARY" type="NUMERIC" />
+            <column name="MAX_SALARY" type="NUMERIC" />
+            <column name="SYMBOL" type="STRING" />
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(ID),0)  + 1
+    INTO seqval
+    FROM MESSAGE_TEMPLATE;
+   
+  
+    execute immediate('CREATE SEQUENCE MESSAGE_TEMPLATE_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

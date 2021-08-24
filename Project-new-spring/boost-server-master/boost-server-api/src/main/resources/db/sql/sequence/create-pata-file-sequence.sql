@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(PATA_FILE_ID),0)  + 1
+    INTO seqval
+    FROM PATA_FILE;
+   
+  
+    execute immediate('CREATE SEQUENCE PATA_FILE_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

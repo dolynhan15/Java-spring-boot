@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="drop-unused-table" author="nhphuc">
+        <dropTable tableName="VACANCY_SUSPEND" cascadeConstraints="true"/>
+        <dropTable tableName="SOCIAL_LOGIN" cascadeConstraints="true"/>
+    </changeSet>
+    
+    <changeSet id="create-vacancy-seat-table" author="nhphuc">
+        <createTable tableName="VACANCY_SEAT">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VACANCY_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-vacancy-seat-vacancy-id" referencedTableName="VACANCY" referencedColumnNames="VACANCY_ID" nullable="false"/>
+            </column>
+            <column name="STATUS" type="NUMBER(2)" remarks="1-Opening; 2-Closed; 3-Suspended">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLOSED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUSPEND_FROM_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUSPENDED_DAYS" type="NUMERIC"/>
+            <column name="RESPONSIBLE_STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-seat-responsible" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="CLOSED_STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-seat-closed-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="true"/>
+            </column>
+            <column name="USER_CV_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-seat-cv-id" referencedTableName="USER_CURRICULUM_VITAE" referencedColumnNames="CURRICULUM_VITAE_ID" nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="VACANCY_ARCHIVED_HISTORY">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VACANCY_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-vacancy-archive-vacancy-id" referencedTableName="VACANCY" referencedColumnNames="VACANCY_ID" nullable="false"/>
+            </column>
+            <column name="STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-archive-staff-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="VACANCY_SUSPENDED_HISTORY">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VACANCY_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-suspend-history-vacancy-id" referencedTableName="VACANCY" referencedColumnNames="VACANCY_ID" nullable="false"/>
+            </column>
+            <column name="STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-suspend-history-staff-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="SUSPEND_FROM_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUSPENDED_DAYS" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="VACANCY_PROCESSING">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VACANCY_ID" type="NUMBER">
+                <constraints foreignKeyName="fk-vacancy-process-vacancy-id" referencedTableName="VACANCY" referencedColumnNames="VACANCY_ID" nullable="false"/>
+            </column>
+            <column name="STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-process-staff-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="USER_CV_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-vacancy-process-cv-id" referencedTableName="USER_CURRICULUM_VITAE" referencedColumnNames="CURRICULUM_VITAE_ID" nullable="true"/>
+            </column>
+            <column name="PROCESS_TYPE" type="NUMERIC(2)" remarks="1-candidate found; 2-candidate invited; 3-candidate accepted; 4-candidate discard; 5-candidate reject"/>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="VACANCY_SEAT"/>
+            <dropTable tableName="VACANCY_ARCHIVED_HISTORY"/>
+            <dropTable tableName="VACANCY_SUSPENDED_HISTORY"/>
+            <dropTable tableName="VACANCY_PROCESSING"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-column-end-suspended-date" author="nhphuc">
+        <addColumn tableName="VACANCY_SEAT">
+            <column name="END_SUSPEND_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-column-deleted-date" author="nhphuc">
+        <addColumn tableName="VACANCY_SEAT">
+            <column name="DELETED_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="change-closed-date-suspend-date-to-nullable" author="nhphuc">
+        <dropNotNullConstraint tableName="VACANCY_SEAT" columnName="CLOSED_DATE"/>
+        <dropNotNullConstraint tableName="VACANCY_SEAT" columnName="SUSPEND_FROM_DATE"/>
+    </changeSet>
+
+    <changeSet id="drop-default-value-closed-date-suspend-date-to-nullable" author="nhphuc">
+        <dropDefaultValue tableName="VACANCY_SEAT" columnName="CLOSED_DATE"/>
+        <dropDefaultValue tableName="VACANCY_SEAT" columnName="SUSPEND_FROM_DATE"/>
+    </changeSet>
+
+    <changeSet id="create-staff-working-table" author="nhphuc">
+        <createTable tableName="STAFF_WORKING">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-staff-working-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="START_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="END_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMBER" defaultValue="0"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-appointment-feedback-table" author="nhphuc">
+        <createTable tableName="APPOINTMENT_FEEDBACK">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="STAFF_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-apt-feedback-staff-id" referencedTableName="STAFF" referencedColumnNames="STAFF_ID" nullable="false"/>
+            </column>
+            <column name="APPOINTMENT_DETAIL_ID" type="NUMERIC">
+                <constraints foreignKeyName="fk-apt-feedback-apt-event-id" referencedTableName="APPOINTMENT_DETAIL" referencedColumnNames="APPOINTMENT_DETAIL_ID" nullable="false"/>
+            </column>
+            <column name="FEEDBACK_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="NUMBER(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_BY" type="NUMBER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMBER" defaultValue="0"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-vacancy-archived-history-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-archived-history-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    <changeSet id="create-vacancy-processing-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-processing-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    <changeSet id="create-vacancy-seat-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-seat-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    <changeSet id="create-vacancy-suspend-history-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-suspend-history-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    
+    <changeSet id="create-vacancy-seat-after-insert-vacancy" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/trigger/create-vacancy-seat-after-create-vacancy.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+    <changeSet id="create-vacancy-seat-after-update-vacancy" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/trigger/create-vacancy-seat-after-update-vacancy.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+    <changeSet id="create-close-vacancy-seat-after-insert-vacancy-candidate-trigger" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/trigger/close-vacancy-seat-after-insert-vacancy-candidate.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+    <changeSet id="create-staff-working-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-staff-working-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+    <changeSet id="create-appointment-feedback-sequence" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-appointement-feedback-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,55 @@
+version: '2.3'
+services:
+  rasa_en_us: &rasa_service
+    image: rasa/rasa:1.3.6
+    restart: always
+    volumes: [".:/app/mounted"]
+    environment:
+      CREDENTIAL_YML: |
+        rest:
+        callback:
+          url: http://192.168.200.1:8080/api/boost-helper/rasa/profile?token=abclihfwlhnalhdkldj&locale=$$LNG
+      ENDPOINT_YML: |
+        tracker_store:
+          type: SQL
+      SETUP: |
+        { echo "cat <<EOF"
+          echo "$$CREDENTIAL_YML""EOF"
+        } | sh >  /app/credentials.yml
+        echo "$$ENDPOINT_YML" > /app/endpoints.yml
+        cp "/app/mounted/model-$$LNG.tar.gz" /app/running-model.tar.gz
+      RUN: exec rasa run -m /app/running-model.tar.gz
+    ports: ["5005:5005"]
+    entrypoint: [sh, -c, 'LNG=en-us sh -c "$$SETUP"; $$RUN --cors "*"']
+  rasa_zh_cn:
+    <<: *rasa_service
+    ports: ["5006:5005"]
+    entrypoint: [sh, -c, 'LNG=zh-cn sh -c "$$SETUP"; $$RUN']
+  rasa_zh_tw:
+    <<: *rasa_service
+    ports: ["5007:5005"]
+    entrypoint: [sh, -c, 'LNG=zh-tw sh -c "$$SETUP"; $$RUN']
+  rasa_id_id:
+    <<: *rasa_service
+    ports: ["5008:5005"]
+    entrypoint: [sh, -c, 'LNG=id-id sh -c "$$SETUP"; $$RUN']
+  rasa_ja_jp:
+    <<: *rasa_service
+    ports: ["5009:5005"]
+    entrypoint: [sh, -c, 'LNG=ja-jp sh -c "$$SETUP"; $$RUN']
+  rasa_ms_my:
+    <<: *rasa_service
+    ports: ["5010:5005"]
+    entrypoint: [sh, -c, 'LNG=ms-my sh -c "$$SETUP"; $$RUN']
+  rasa_th_th:
+    <<: *rasa_service
+    ports: ["5011:5005"]
+    entrypoint: [sh, -c, 'LNG=th-th sh -c "$$SETUP"; $$RUN']
+  rasa_vi_vn:
+    <<: *rasa_service
+    ports: ["5012:5005"]
+    entrypoint: [sh, -c, 'LNG=vi-vn sh -c "$$SETUP"; $$RUN']
+  rasa_ko_kr:
+    <<: *rasa_service
+    ports: ["5013:5005"]
+    entrypoint: [sh, -c, 'LNG=ko-kr sh -c "$$SETUP"; $$RUN']

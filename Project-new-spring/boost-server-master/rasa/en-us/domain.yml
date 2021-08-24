@@ -1,0 +1,73 @@
+intents:
+  - greet
+  - inform_referral_code
+  - inform_own_referral_code
+  - redeem_referral_code
+  - share_referral_code
+  - seek_support
+
+actions:
+  - utter_greet
+  - utter_own_code
+  - utter_share_code
+  - utter_friend_code
+  - utter_redeem_code
+  - utter_default
+  - utter_support
+
+entities:
+  - referral_code
+
+slots:
+  referral_code:
+    type: unfeaturized
+
+templates:
+  utter_support:
+  - custom:
+      type: 19
+    channel: callback
+  - text: "Hi! I can't answer you now, but I will redirect your message to our Support service, so they will be able to help you."
+    image: "./rasa-logo.png"
+
+  utter_greet:
+  - custom:
+      type: 8
+    channel: callback
+  - text: "Hello! How are you? What would you like to know about BOOST?"
+    image: "./rasa-logo.png"
+
+  utter_default:
+  - custom:
+      type: 11
+    channel: callback
+  - text: "Sorry, I cannot understand you. But I certainly try to reach BOOST support team with your message."
+    image: "./rasa-error.png"
+
+  utter_own_code:
+  - custom:
+      type: 9
+      referral_code: "{referral_code}"
+    channel: callback
+  - text: "Hi. It’s your referral code that will get you Friend Coins if you share it. Do you need some help sharing it?"
+    buttons:
+    - title: "Share"
+      payload: "/share_referral_code" 
+
+  utter_friend_code:
+  - custom:
+      type: 9
+      referral_code: "{referral_code}"
+    channel: callback
+  - text: "Hello! It’s your friend’s referral code, that can get Friend Coins to you both. Do you want my help redeeming it?"
+    buttons:
+    - title: "Redeem"
+      payload: "/redeem_referral_code"
+
+  utter_share_code:
+  - text: "url/share_code?code={referral_code} ✔"
+    image: "./rasa-logo.png"
+
+  utter_redeem_code:
+  - text: "url/redeem_code?code={referral_code} ✔"
+    image: "./rasa-logo.png"

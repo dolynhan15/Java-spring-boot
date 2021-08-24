@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <!--Disable for Staging because it is ready -->
+    <!--<changeSet id="add-assessment-id-column-assessment-level-table" author="tnlong">-->
+        <!--<addColumn tableName="ASSESSMENT_LEVEL">-->
+            <!--<column name="ASSESSMENT_ID" type="NUMERIC" />-->
+        <!--</addColumn>-->
+    <!--</changeSet>-->
+
+    <changeSet id="modify_nullable_for_assessment_columns_table" author="nhphuc">
+        <dropNotNullConstraint tableName="ASSESSMENT" columnName="NAME"/>
+        <dropNotNullConstraint tableName="ASSESSMENT" columnName="PRICE"/>
+        <dropNotNullConstraint tableName="ASSESSMENT" columnName="PICTURE"/>
+    </changeSet>
+    <changeSet id="modify_nullable_for_assessment_level_columns_table" author="nhphuc">
+        <dropNotNullConstraint tableName="ASSESSMENT_LEVEL" columnName="UPDATED_BY"/>
+        <dropNotNullConstraint tableName="ASSESSMENT_LEVEL" columnName="CREATED_BY"/>
+    </changeSet>
+    <changeSet id="add_level_to_assessment_level_table" author="nhphuc">
+        <addColumn tableName="ASSESSMENT_LEVEL">
+            <column name="LEVEL_VALUE" type="NUMERIC" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

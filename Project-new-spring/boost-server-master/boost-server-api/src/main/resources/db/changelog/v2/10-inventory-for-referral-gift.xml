@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-active-duration-for-referral-gift-table" author="nhphuc">
+        <addColumn tableName="REFERRAL_GIFT">
+            <column name="ACTIVE_DATE" type="TIMESTAMP" defaultValueDate="to_timestamp('2018-12-10 12:34:56','YYYY-MM-DD HH24:MI:SS')"/>
+            <column name="EXPIRED_DATE" type="TIMESTAMP" defaultValueDate="to_timestamp('2019-02-10 12:34:56','YYYY-MM-DD HH24:MI:SS')"/>
+        </addColumn>
+        <dropDefaultValue tableName="REFERRAL_GIFT" columnName="ACTIVE_DATE" columnDataType="TIMESTAMP"/>
+        <dropDefaultValue tableName="REFERRAL_GIFT" columnName="EXPIRED_DATE" columnDataType="TIMESTAMP"/>
+        <rollback>
+            <dropColumn tableName="REFERRAL_GIFT" columnName="ACTIVE_DATE"/>
+            <dropColumn tableName="REFERRAL_GIFT" columnName="EXPIRED_DATE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="add-coins-active-duration-for-referral-claim-gift-table" author="nhphuc">
+        <addColumn tableName="REFERRAL_CLAIM_GIFT">
+            <column name="ACTIVE_DATE" type="TIMESTAMP" defaultValueDate="to_timestamp('2018-12-10 12:34:56','YYYY-MM-DD HH24:MI:SS')"/>
+            <column name="EXPIRED_DATE" type="TIMESTAMP" defaultValueDate="to_timestamp('2019-02-10 12:34:56','YYYY-MM-DD HH24:MI:SS')"/>
+        </addColumn>
+        <dropDefaultValue tableName="REFERRAL_CLAIM_GIFT" columnName="ACTIVE_DATE" columnDataType="TIMESTAMP"/>
+        <dropDefaultValue tableName="REFERRAL_CLAIM_GIFT" columnName="EXPIRED_DATE" columnDataType="TIMESTAMP"/>
+        <rollback>
+            <dropColumn tableName="REFERRAL_CLAIM_GIFT" columnName="ACTIVE_DATE"/>
+            <dropColumn tableName="REFERRAL_CLAIM_GIFT" columnName="EXPIRED_DATE"/>
+        </rollback>
+    </changeSet>
+    
+    <changeSet id="create-function-to-get-status-of-gift-base-on-duration" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/function/create-get-status-of-gift-by-duration.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+    <changeSet id="create-get-interval-of-gift-by-duration" author="nhphuc" runOnChange="true">
+        <sqlFile path="/db/sql/function/create-get-interval-of-gift-by-duration.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+
+</databaseChangeLog>

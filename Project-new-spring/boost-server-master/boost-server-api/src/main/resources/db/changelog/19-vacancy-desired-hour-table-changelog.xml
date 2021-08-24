@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="vacancy_working_hour_table_rename_to_vacancy_desired_hour" author="trung.mai">
+        <renameTable oldTableName="vacancy_working_hour" newTableName="vacancy_desired_hour"/>
+    </changeSet>
+
+    <changeSet id="vacancy_desired_hour_remame_id" author="trung.mai">
+        <renameColumn oldColumnName="vacancy_working_hour_id" newColumnName="vacancy_desired_hour_id"
+                      tableName="vacancy_desired_hour"/>
+    </changeSet>
+
+</databaseChangeLog>

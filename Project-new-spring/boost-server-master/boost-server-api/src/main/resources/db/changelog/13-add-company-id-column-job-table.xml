@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="13-add-company-id-column-job-table" author="tnlong">
+        <addColumn tableName="JOB">
+            <column name="company_id" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="add_foreign_job_company" author="tnlong">
+        <addForeignKeyConstraint baseTableName="JOB" baseColumnNames="company_id" constraintName="fk_job_to_company" referencedTableName="company"
+                                 referencedColumnNames="company_id" />
+    </changeSet>
+</databaseChangeLog>

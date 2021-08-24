@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="delete-BaseEntity-columns-in-hotel-type-table" author="dlly">
+        <dropColumn columnName="CREATED_BY" tableName="HOTEL_TYPE"/>
+        <dropColumn columnName="CREATED_DATE" tableName="HOTEL_TYPE"/>
+        <dropColumn columnName="UPDATED_BY" tableName="HOTEL_TYPE"/>
+        <dropColumn columnName="UPDATED_DATE" tableName="HOTEL_TYPE"/>
+        <dropColumn columnName="IS_DELETED" tableName="HOTEL_TYPE"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-sequence-for-appointment-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-appointment-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-app-version-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-app-version-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-assessment-level-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-assessment-level-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-assessment-personal-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-assessment-personal-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-assessment-personal-question-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-assessment-personal-question-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-benefit-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-benefit-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-city-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-city-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-company-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-company-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-join-company-request-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-join-company-request-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-country-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-country-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-currency-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-currency-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-curriculum-vitae-job-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-curriculum-vitae-job-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-education-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-education-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-hotel_type-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-hotel-type-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-job-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-job-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-language-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-language-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-location-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-location-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-pata-file-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-pata-file-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-permission-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-permission-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-province-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-province-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-referral-claim-assessment-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-referral-claim-assessment-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-referral-code-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-referral-code-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-referral-redeem-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-referral-redeem-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-role-company-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-role-company-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-soft-skill-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-soft-skill-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-staff-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-staff-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-access-token-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-access-token-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-benefit-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-benefit-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-curriculum-vitae-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-curriculum-vitae-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-desired-hour-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-desired-hour-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-language-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-language-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-personality-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-personality-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-previous-position-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-previous-position-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-qualification-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-qualification-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-user-soft-skill-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-user-soft-skill-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-assessment-level-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-assessment-level-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-benefit-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-benefit-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-candidates-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-candidates-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-desired-hour-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-desired-hour-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-language-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-languages-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-soft-skill-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-soft-skill-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-vacancy-suspend-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-vacancy-suspend-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+
+    <changeSet id="create-sequence-for-working-hour-table" author="nhphuc">
+        <sqlFile path="/db/sql/sequence/create-working-hour-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/" />
+    </changeSet>
+</databaseChangeLog>

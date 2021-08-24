@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="province_for_thailan_table_insert_data" author="trung.mai" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/thailan-province.csv"
+                        separator=","
+                        tableName="PROVINCE" primaryKey="PROVINCE_ID">
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="COUNTRY_ID" type="NUMERIC" />
+            <column name="NAME" type="STRING" />
+            <column name="CODE" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="province_for_indonesia_table_insert_data" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/province-indonesia.csv"
+                        separator=","
+                        tableName="PROVINCE" primaryKey="PROVINCE_ID">
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="COUNTRY_ID" type="NUMERIC" />
+            <column name="NAME" type="STRING" />
+            <column name="CODE" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="province_for_vietnam_table_insert_data" author="tnlong" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/province-vietnam.csv"
+                        separator=","
+                        tableName="PROVINCE" primaryKey="PROVINCE_ID">
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="COUNTRY_ID" type="NUMERIC" />
+            <column name="NAME" type="STRING" />
+            <column name="CODE" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+</databaseChangeLog>

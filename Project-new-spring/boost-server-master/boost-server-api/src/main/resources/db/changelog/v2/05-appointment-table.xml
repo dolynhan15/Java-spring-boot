@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="appointment-table-rename-manage-to-staff" author="trung.mai">
+        <renameColumn tableName="APPOINTMENT" oldColumnName="MANAGER_ID" newColumnName="STAFF_ID"/>
+    </changeSet>
+    <changeSet id="appointment-table-add-vacancy-id-column" author="trung.mai">
+        <addColumn tableName="APPOINTMENT">
+            <column name="VACANCY_ID" type="NUMBER"/>
+        </addColumn>
+    </changeSet>
+    
+    <changeSet id="appointment-table-add-not-null-vacancy-id-column" author="trung.mai">
+        <addNotNullConstraint tableName="APPOINTMENT" columnName="VACANCY_ID" />
+    </changeSet>
+
+    <changeSet id="appointment-table-remove-user-profile-id-column" author="trung.mai">
+        <dropColumn tableName="APPOINTMENT" columnName="USER_PROFILE_ID"/>
+    </changeSet>
+
+    <changeSet id="appointment-table-add-foreign-key-for-vacancy-id" author="trung.mai">
+        <addForeignKeyConstraint constraintName="APPOINTMENT_TO_VACANCY"
+                                 baseTableName="APPOINTMENT" baseColumnNames="VACANCY_ID"
+                                 referencedTableName="VACANCY" referencedColumnNames="VACANCY_ID"/>
+    </changeSet>
+
+    <changeSet id="appointment-table-add-foreign-key-for-staff-id" author="trung.mai">
+        <addForeignKeyConstraint constraintName="APPOINTMENT_TO_STAFF"
+                                 baseTableName="APPOINTMENT" baseColumnNames="STAFF_ID"
+                                 referencedTableName="STAFF" referencedColumnNames="STAFF_ID"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(SOFT_SKILL_ID),0)  + 1
+    INTO seqval
+    FROM SOFT_SKILL;
+   
+  
+    execute immediate('CREATE SEQUENCE SOFT_SKILL_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

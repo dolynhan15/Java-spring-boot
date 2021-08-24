@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-referral-code-table-changelog" author="dlly">
+        <createTable tableName="referral_code">
+            <column name="referral_code_ID" type="NUMERIC" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="CODE" type="NVARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_PROFILE_ID" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_EXPIRED" type="BOOLEAN" defaultValue="false"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

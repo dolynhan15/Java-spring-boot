@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="update-number-company-require-column-to-nullable-assessment-table" author="tnlong">
+        <dropNotNullConstraint columnDataType="NUMERIC"
+                               columnName="NUMBER_COMPANY_REQUIRE"
+                               tableName="ASSESSMENT" />
+    </changeSet>
+    <changeSet id="update-number-created-by-to-nullable-assessment-table" author="tnlong">
+        <dropNotNullConstraint columnDataType="NUMERIC"
+                               columnName="CREATED_BY"
+                               tableName="ASSESSMENT" />
+    </changeSet>
+    <changeSet id="update-number-updated-by-to-nullable-assessment-table" author="tnlong">
+        <dropNotNullConstraint columnDataType="NUMERIC"
+                               columnName="UPDATED_BY"
+                               tableName="ASSESSMENT" />
+    </changeSet>
+    <changeSet id="update-is-deleted-default-value-assessment-table" author="tnlong">
+        <addDefaultValue columnDataType="NUMERIC"
+                         columnName="IS_DELETED"
+                         defaultValueNumeric="1"
+                         tableName="ASSESSMENT" />
+    </changeSet>
+    <!--<changeSet id="add-assessment-type-column-assessment-table" author="tnlong">-->
+        <!--<addColumn tableName="ASSESSMENT">-->
+            <!--<column name="TYPE" type="NUMERIC" />-->
+        <!--</addColumn>-->
+    <!--</changeSet>-->
+
+    <!--History: Change Not null to null first and then update to run on staging. Staging readly have this column and not nullable is yes-->
+    <changeSet id="assessment-table-drop-not-null-constraint" author="trung.mai">
+        <dropNotNullConstraint columnDataType="NUMERIC"
+                               columnName="TYPE"
+                               tableName="ASSESSMENT" />
+    </changeSet>
+
+    <changeSet id="change-name-column-length-assessment-table" author="tnlong">
+        <modifyDataType
+                columnName="NAME"
+                newDataType="varchar2(128)"
+                tableName="ASSESSMENT" />
+    </changeSet>
+    <changeSet id="change-picture-column-length-assessment-table" author="tnlong">
+        <modifyDataType
+                columnName="PICTURE"
+                newDataType="varchar2(1000)"
+                tableName="ASSESSMENT" />
+    </changeSet>
+    <changeSet id="rename-assessment-name-column-to-assessment-level-name-assessment-level-table" author="tnlong">
+        <renameColumn columnDataType="varchar2(20)"
+                      newColumnName="ASSESSMENT_LEVEL_NAME"
+                      oldColumnName="ASSESSMENT_NAME"
+                      tableName="ASSESSMENT_LEVEL" />
+    </changeSet>
+    <changeSet id="change-data-type-price-column-assessment-table" author="tnlong">
+        <modifyDataType columnName="PRICE"
+                        newDataType="NUMERIC(12, 2)"
+                        tableName="ASSESSMENT"/>
+    </changeSet>
+    <changeSet id="create-scale-id-column-assessment-table" author="dlly">
+        <addColumn tableName="ASSESSMENT">
+            <column name="SCALE_ID" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-mapping-id-column-assessment-table" author="dlly">
+        <addColumn tableName="ASSESSMENT">
+            <column name="MAPPING_ID" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-scale-id-column-assessment-level-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_LEVEL">
+            <column name="SCALE_ID" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-mapping-id-column-assessment-level-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_LEVEL">
+            <column name="MAPPING_ID" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="create-assessment-level-desc-column-assessment-level-table" author="dlly">
+        <addColumn tableName="ASSESSMENT_LEVEL">
+            <column name="ASSESSMENT_LEVEL_DESC" type="NVARCHAR(20)" />
+        </addColumn>
+    </changeSet>
+    <changeSet id="rename-assessment-level-into-assessment-level-value-column-assessment-table" author="dlly">
+        <renameColumn columnDataType="nvarchar2"
+                      newColumnName="ASSESSMENT_LEVEL_VALUE"
+                      oldColumnName="ASSESSMENT_LEVEL"
+                      tableName="ASSESSMENT_LEVEL" />
+    </changeSet>
+
+    <changeSet id="assessment-table-add-package-id-column" author="trung.mai">
+        <addColumn tableName="ASSESSMENT">
+            <column name="PACKAGE_ID" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="assessment-table-add-topic-id-column" author="trung.mai">
+        <addColumn tableName="ASSESSMENT">
+            <column name="TOPIC_ID" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="assessment-table-add-category-id-column" author="trung.mai">
+        <addColumn tableName="ASSESSMENT">
+            <column name="CATEGORY_ID" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="assessment-table-add-time-limit-column" author="trung.mai">
+        <addColumn tableName="ASSESSMENT">
+            <column name="TIME_LIMIT" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

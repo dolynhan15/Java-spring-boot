@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="vacancy-table-add-salary-max-column" id="trung.mai">
+        <addColumn tableName="VACANCY">
+            <column name="SALARY_MAX" type="NUMBER"></column>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="SALARY_MAX" columnName="VACANCY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="vacancy-table-add-job-location-column" id="trung.mai">
+        <addColumn tableName="VACANCY">
+            <column name="JOB_LOCATION_ID" type="NUMBER"></column>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="JOB_LOCATION_ID" columnName="VACANCY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="vacancy-table-add-search-location-column" id="trung.mai">
+        <addColumn tableName="VACANCY">
+            <column name="SEARCH_LOCATION_ID" type="NUMBER"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="SEARCH_LOCATION_ID" columnName="VACANCY"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="vacancy-table-add-foreign-key-for-job-location-id" author="trung.mai">
+        <addForeignKeyConstraint constraintName="VACANCY_TO_LOCATION_JOB"
+                                 baseTableName="VACANCY" baseColumnNames="JOB_LOCATION_ID"
+                                 referencedTableName="LOCATION" referencedColumnNames="LOCATION_ID"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="VACANCY" constraintName="VACANCY_TO_LOCATION_JOB"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="vacancy-table-add-foreign-key-for-search-location-id" author="trung.mai">
+        <addForeignKeyConstraint constraintName="VACANCY_TO_LOCATION_SEARCH"
+                                 baseTableName="VACANCY" baseColumnNames="SEARCH_LOCATION_ID"
+                                 referencedTableName="LOCATION" referencedColumnNames="LOCATION_ID"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="VACANCY" constraintName="VACANCY_TO_LOCATION_SEARCH"/>
+        </rollback>
+    </changeSet>
+    <changeSet id="vacancy-table-drop-education-id" author="trung.mai">
+        <dropNotNullConstraint tableName="VACANCY" columnName="EDUCATION_ID"/>
+    </changeSet>
+
+    <changeSet id="add-new-columns-relate-to-suspend-vacancy" author="dlly" >
+        <addColumn tableName="VACANCY">
+            <column name="START_SUSPEND_DATE" type="TIMESTAMP"/>
+            <column name="SUSPEND_DAYS" type="NUMBER(5)"/>
+            <column name="ARCHIVIST_ID" type="NUMBER"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="VACANCY" columnName="START_SUSPEND_DATE"/>
+            <dropColumn tableName="VACANCY" columnName="SUSPEND_DAYS"/>
+            <dropColumn tableName="VACANCY" columnName="ARCHIVIST_ID"/>
+        </rollback>
+
+        <addForeignKeyConstraint constraintName="VACANCY_TO_STAFF_ARCHIVIST"
+                                 baseTableName="VACANCY" baseColumnNames="ARCHIVIST_ID"
+                                 referencedTableName="STAFF" referencedColumnNames="STAFF_ID"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="VACANCY" constraintName="VACANCY_TO_STAFF"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

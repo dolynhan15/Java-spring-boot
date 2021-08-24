@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="load-data-for-country-table" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/country.csv"
+                        separator=","
+                        tableName="COUNTRY" primaryKey="COUNTRY_ID">
+            <column name="COUNTRY_ID" type="NUMERIC"/>
+            <column name="COUNTRY_NAME" type="STRING"/>
+            <column name="COUNTRY_CODE" type="STRING"/>
+            <column name="PHONE_CODE" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load-data-for-singapore-city-table" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/community-singapore.csv"
+                        separator=","
+                        tableName="PROVINCE" primaryKey="PROVINCE_ID">
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="COUNTRY_ID" type="NUMERIC" />
+            <column name="NAME" type="STRING" />
+            <column name="CODE" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load-data-for-singapore-province-table" author="nhphuc" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/constituency-singapore.csv"
+                        separator=","
+                        tableName="CITY" primaryKey="CITY_ID">
+            <column name="CITY_ID" type="NUMERIC" />
+            <column name="PROVINCE_ID" type="NUMERIC" />
+            <column name="CITY_NAME" type="STRING" />
+            <column name="IS_DELETED" type="NUMERIC" />
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

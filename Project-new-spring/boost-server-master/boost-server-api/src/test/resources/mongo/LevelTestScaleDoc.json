@@ -1,0 +1,144 @@
+[
+  {
+    "id": "cefr",
+    "_class": "com.qooco.boost.data.mongo.entities.LevelTestScaleDoc",
+    "mappingID": "adult",
+    "levels": [
+      {
+        "value": "1",
+        "name": "A1",
+        "descr": "1"
+      },
+      {
+        "value": "2",
+        "name": "A2",
+        "descr": "2"
+      },
+      {
+        "value": "3",
+        "name": "B1",
+        "descr": "3"
+      },
+      {
+        "value": "4",
+        "name": "B2",
+        "descr": "4"
+      },
+      {
+        "value": "5",
+        "name": "C1",
+        "descr": "5"
+      }
+    ],
+    "timestamp": "2018-09-17T17:32:00Z"
+  },
+  {
+    "id": "BC",
+    "_class": "com.qooco.boost.data.mongo.entities.LevelTestScaleDoc",
+    "mappingID": "adult",
+    "levels": [
+      {
+        "value": "1",
+        "name": "BC1",
+        "descr": "1"
+      },
+      {
+        "value": "2",
+        "name": "BC2",
+        "descr": "2"
+      },
+      {
+        "value": "3",
+        "name": "BC3",
+        "descr": "3"
+      },
+      {
+        "value": "4",
+        "name": "BC4",
+        "descr": "4"
+      },
+      {
+        "value": "5",
+        "name": "BC5",
+        "descr": "5"
+      }
+    ],
+    "timestamp": "2018-09-17T17:32:00Z"
+  },
+  {
+    "id": "QC",
+    "_class": "com.qooco.boost.data.mongo.entities.LevelTestScaleDoc",
+    "mappingID": "adult",
+    "levels": [
+      {
+        "value": "1",
+        "name": "QC1",
+        "descr": "1"
+      },
+      {
+        "value": "2",
+        "name": "QC2",
+        "descr": "2"
+      },
+      {
+        "value": "3",
+        "name": "QC3",
+        "descr": "3"
+      },
+      {
+        "value": "4",
+        "name": "QC4",
+        "descr": "4"
+      },
+      {
+        "value": "5",
+        "name": "QC5",
+        "descr": "5"
+      }
+    ],
+    "timestamp": "2018-09-17T17:32:00Z"
+  },
+  {
+    "id": "K",
+    "_class": "com.qooco.boost.data.mongo.entities.LevelTestScaleDoc",
+    "mappingID": "kids",
+    "levels": [
+      {
+        "value": "1",
+        "name": "K1",
+        "descr": "1"
+      },
+      {
+        "value": "2",
+        "name": "K2",
+        "descr": "2"
+      },
+      {
+        "value": "3",
+        "name": "K3",
+        "descr": "3"
+      },
+      {
+        "value": "4",
+        "name": "K4",
+        "descr": "4"
+      },
+      {
+        "value": "5",
+        "name": "K5",
+        "descr": "5"
+      },
+      {
+        "value": "6",
+        "name": "K6",
+        "descr": "6"
+      },
+      {
+        "value": "7",
+        "name": "K7",
+        "descr": "7"
+      }
+    ],
+    "timestamp": "2018-09-17T17:32:00Z"
+  }
+]

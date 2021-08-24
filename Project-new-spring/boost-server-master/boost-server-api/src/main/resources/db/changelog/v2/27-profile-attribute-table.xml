@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="profile-attribute-table-create-table" author="trong.dinh">
+        <createTable tableName="PROFILE_ATTRIBUTE">
+            <column name="ID" type="NUMERIC">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IS_DELETED" type="NUMERIC(2)" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATED_DATE" type="TIMESTAMP(6)"  defaultValueComputed="sysdate">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="NUMERIC"/>
+            <column name="UPDATED_BY" type="NUMERIC"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PROFILE_ATTRIBUTE"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="profile-attribute-table-load-data" author="trong.dinh" runOnChange="true">
+        <loadUpdateData file="/db/csv/profile-attribute.csv" tableName="PROFILE_ATTRIBUTE" primaryKey="ID">
+            <column name="ID" type="NUMERIC"/>
+            <column name="NAME" type="STRING"/>
+            <column name="DESCRIPTION" type="STRING"/>
+            <column name="IS_DELETED" type="NUMERIC"/>
+            <column name="CREATED_DATE" type="STRING"/>
+            <column name="UPDATED_DATE" type="STRING"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="profile-attribute-table-create-sequence" author="trong.dinh">
+        <sqlFile path="/db/sql/sequence/create-profile-attribute-sequence.sql" splitStatements="true" stripComments="true" endDelimiter="/"/>
+    </changeSet>
+
+</databaseChangeLog>

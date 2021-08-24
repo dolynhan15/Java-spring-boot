@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(APP_VERSION_ID),0)  + 1
+    INTO seqval
+    FROM APP_VERSION;
+   
+  
+    execute immediate('CREATE SEQUENCE APP_VERSION_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/

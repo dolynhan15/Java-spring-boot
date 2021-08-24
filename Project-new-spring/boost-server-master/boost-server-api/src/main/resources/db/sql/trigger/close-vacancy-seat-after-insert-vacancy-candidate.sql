@@ -1,0 +1,26 @@
+CREATE OR REPLACE TRIGGER CLOSE_SLOT_AFTER_RECRUITED
+AFTER INSERT ON VACANCY_CANDIDATE
+FOR EACH ROW
+DECLARE
+v_id NUMBER;
+v_seat_open NUMBER;
+v_seat_closed NUMBER;
+BEGIN
+	v_seat_open := 1;
+    v_seat_closed := 2;
+-- recruited new candidate
+    IF :NEW.CANDIDATE_STATUS = 1 THEN
+        SELECT ID INTO v_id
+        FROM VACANCY_SEAT
+        WHERE VACANCY_ID = :NEW.VACANCY_ID AND STATUS = v_seat_open AND rownum <= 1
+        ORDER BY ID;
+
+        IF v_id > 0 THEN
+            UPDATE VACANCY_SEAT
+            SET STATUS = v_seat_closed, CLOSED_DATE = :NEW.CREATED_DATE, CLOSED_STAFF_ID = :NEW.ARCHIVIST_ID, USER_CV_ID = :NEW.CANDIDATE_ID
+            WHERE ID = v_id;
+        END IF;
+
+    END IF;
+END CLOSE_SLOT_AFTER_RECRUITED;
+/

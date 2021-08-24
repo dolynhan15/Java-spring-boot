@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="add-city-column-user-profile-table" author="tnlong">
+        <addColumn tableName="USER_PROFILE">
+            <column name="city_id" type="NUMERIC" />
+        </addColumn>
+    </changeSet>
+
+    <!--<changeSet id="user-profile-table-remove-foreign-key" author="trung.mai">-->
+        <!--<dropForeignKeyConstraint baseTableName="USER_PROFILE" constraintName="USER_PROFILE_TO_ROLE_COMPANY"/>-->
+    <!--</changeSet>-->
+
+    <changeSet id="user-profile-table-drop-role-id-column" author="trung.mai">
+        <dropColumn tableName="USER_PROFILE" columnName="ROLE_ID"/>
+    </changeSet>
+
+    <changeSet id="user-profile-table-add-column-profile-step" author="trung.mai">
+        <addColumn tableName="USER_PROFILE">
+            <column name="PROFILE_STEP" type="NUMERIC"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

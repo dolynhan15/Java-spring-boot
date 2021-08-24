@@ -1,0 +1,4 @@
+Insert into MESSAGE_TEMPLATE (ID,LANGUAGE_CODE,CONTENT,IS_DELETED,CREATED_DATE,UPDATED_DATE) values
+(1,'en','Thank you for applying for a position with our company. After careful consideration, however…',0,to_timestamp('09-JUL-19 02.53.10.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),to_timestamp('09-JUL-19 02.53.11.000000000 PM','DD-MON-RR HH.MI.SSXFF AM')),
+(2,'en','Dear #name. I’m sorry to inform you about the misfortune event.',0,to_timestamp('09-JUL-19 02.53.10.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),to_timestamp('09-JUL-19 02.53.11.000000000 PM','DD-MON-RR HH.MI.SSXFF AM')),
+(3,'en','We appreciate your interest in applying for employment, dear #Name. Your application was very strong, and you were among the four finalists',0,to_timestamp('09-JUL-19 02.53.10.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'),to_timestamp('09-JUL-19 02.53.11.000000000 PM','DD-MON-RR HH.MI.SSXFF AM'));

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="drop-not-null-to-user-curriculum-vitae-table" author="dlly">
+        <dropNotNullConstraint tableName="USER_CURRICULUM_VITAE" columnName="IS_HOUR_SALARY"/>
+        <dropNotNullConstraint tableName="USER_CURRICULUM_VITAE" columnName="MIN_SALARY"/>
+        <dropNotNullConstraint tableName="USER_CURRICULUM_VITAE" columnName="MAX_SALARY"/>
+        <dropNotNullConstraint tableName="USER_CURRICULUM_VITAE" columnName="IS_ASAP"/>
+        <dropNotNullConstraint tableName="USER_CURRICULUM_VITAE" columnName="IS_FULL_TIME"/>
+    </changeSet>
+</databaseChangeLog>

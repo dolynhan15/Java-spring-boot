@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="insert-fixed-data-in-hotel-type-table" author="dlly" runOnChange="true">
+        <loadUpdateData encoding="UTF-8"
+                        file="/db/csv/hotel-type.csv"
+                        separator=","
+                        tableName="HOTEL_TYPE" primaryKey="HOTEL_TYPE_ID">
+            <column name="HOTEL_TYPE_ID" type="NUMERIC" />
+            <column name="HOTEL_TYPE_NAME" type="STRING" />
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+BEGIN
+  DECLARE
+  seqval NUMBER;
+  BEGIN
+    SELECT NVL(MAX(LOCATION_ID),0)  + 1
+    INTO seqval
+    FROM LOCATION;
+   
+  
+    execute immediate('CREATE SEQUENCE LOCATION_SEQ MINVALUE 1 START WITH '||seqval||' INCREMENT BY 1 ORDER CACHE 20');
+  END;
+END;
+/
