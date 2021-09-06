@@ -20,20 +20,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../HaDuHoChua/HaDuHoChua" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -44,6 +31,13 @@
       <option name="presentableId" value="Default" />
       <updated>1629360159673</updated>
       <workItem from="1629360161688" duration="1331000" />
+      <workItem from="1629796560965" duration="118000" />
+      <workItem from="1629796699213" duration="946000" />
+      <workItem from="1629797751414" duration="231000" />
+      <workItem from="1629798177624" duration="135000" />
+      <workItem from="1629798916275" duration="291000" />
+      <workItem from="1629799394463" duration="45000" />
+      <workItem from="1629819957807" duration="93000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1629360216081</created>
@@ -75,6 +69,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />

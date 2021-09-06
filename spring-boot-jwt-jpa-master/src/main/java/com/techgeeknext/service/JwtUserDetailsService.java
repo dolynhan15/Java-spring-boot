@@ -41,11 +41,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	public UserDao save(UserDao user) {
 		UserDao newUser = new UserDao();
-//		newUser.setUsername(user.getUsername());
-//		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		System.out.println("save");
-		System.out.println(user);
-		System.out.println(user.getPassword());
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		newUser.setEmail(user.getEmail());
+		newUser.setPhone(user.getPhone());
 		return userDao.save(newUser);
 	}
 }
