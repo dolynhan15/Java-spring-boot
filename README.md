@@ -50,7 +50,7 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
-      <a href="#technologies">Technologies</a>
+      <a href="#technologies">Set up</a>
     </li>
     <li>
       <a href="#main-features">Main features</a>
